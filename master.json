@@ -30,5 +30,9 @@
             "href": "https://github.com/{{ github.name }}/{{ name }}/blob/main/LICENSE",
             "src": "https://img.shields.io/github/license/{{ github.name }}/{{ name }}"
         }
-    ]
+    ],
+    "name": "@master/style-element.react.util",
+    "github": {
+        "name": "master-co"
+    }
 }
