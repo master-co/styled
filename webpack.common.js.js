@@ -9,7 +9,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.ts$|tsx/,
                 loader: 'ts-loader',
                 options: {
                     configFile: path.resolve(
@@ -20,7 +20,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.m?js$/,
+                test: /\.js$|jsx/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     {
@@ -33,5 +33,19 @@ module.exports = {
             },
         ]
     },
-    plugins: []
+    plugins: [],
+    externals: { 
+        react: {
+            commonjs: "react",
+            commonjs2: "react",
+            amd: "React",
+            root: "React"
+        },
+        "react-dom": {
+            commonjs: "react-dom",
+            commonjs2: "react-dom",
+            amd: "ReactDOM",
+            root: "ReactDOM"
+        }
+    }
 }

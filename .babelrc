@@ -1,5 +1,6 @@
 {
     "presets": [
+        "@babel/react",
         [
             "@babel/preset-env",
             {
@@ -11,6 +12,7 @@
         "@babel/preset-typescript"
     ],
     "plugins": [
+        "transform-class-properties",
         "@babel/plugin-transform-runtime",
         [
             "@babel/plugin-proposal-decorators",
