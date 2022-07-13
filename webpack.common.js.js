@@ -4,7 +4,7 @@ const src = path.join('./src');
 module.exports = {
     resolve: {
         extensions: ['.js', '.ts', '.mjs'],
-        modules: [src, path.join('./node_modules')]
+        modules: [src, path.join('./node_modules')],
     },
     module: {
         rules: [
@@ -33,19 +33,5 @@ module.exports = {
             },
         ]
     },
-    plugins: [],
-    externals: { 
-        react: {
-            commonjs: "react",
-            commonjs2: "react",
-            amd: "React",
-            root: "React"
-        },
-        "react-dom": {
-            commonjs: "react-dom",
-            commonjs2: "react-dom",
-            amd: "ReactDOM",
-            root: "ReactDOM"
-        }
-    }
+    plugins: []
 }

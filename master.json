@@ -31,7 +31,7 @@
             "src": "https://img.shields.io/github/license/{{ github.name }}/{{ name }}"
         }
     ],
-    "name": "@master/style-element.react.util",
+    "name": "@master/style-element.react",
     "github": {
         "name": "master-co"
     }

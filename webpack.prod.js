@@ -27,7 +27,8 @@ module.exports = {
     resolve: jsConfig.resolve,
     externals: [
         ...Object.keys(package.peerDependencies || []),
-        ...Object.keys(package.dependencies || [])
+        ...Object.keys(package.dependencies || []),
+        'react'
     ],
     mode: 'production',
     optimization: {
@@ -51,7 +52,7 @@ module.exports = {
     output: {
         clean: true,
         library: {
-            name: '@master/package',
+            name: '@master/style-element.react',
             type: 'umd',
         },
         globalObject: 'self'
