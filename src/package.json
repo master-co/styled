@@ -1,6 +1,6 @@
 {
     "name": "@master/style-element.react",
-    "description": "",
+    "description": "Quickly create styled React elements using class names.",
     "author": "Aoyue Design LLC.",
     "main": "index.js",
     "types": "index.d.ts",
