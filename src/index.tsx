@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 
 type baseType = string | number | Record<string, boolean>
 const el: {
@@ -25,34 +26,6 @@ function createElement(Tag: string) {
 
         return component
     }
-}
-
-function handleDeep(results, value: any) {
-    if (value) {
-        if (typeof value === 'string' || typeof value === 'number') {
-            results.push(value)
-        } else if (typeof value === 'object') {
-            if (Array.isArray(value)) {
-                for (const eachVal of value) {
-                    handleDeep(results, eachVal)
-                }
-            } else {
-                for (const key in value) {
-                    if (value[key]) {
-                        results.push(key)
-                    }
-                }
-            }
-        }
-    }
-}
-
-function clsx(...args: any[]) {
-    const results: any[] = []
-    for (const eachArg of args) {
-        handleDeep(results, eachArg)
-    }
-    return results.join(' ')
 }
 
 export { el }
