@@ -18,28 +18,28 @@
 
 ###### CONTENTS
 - [Install](#install)
-- [Getting started](#getting-started)
-  - [Basic usage](#basic-usage)
-  - [Conditional class names](#conditional-class-names)
+- [Principle](#principle)
+- [Usage](#usage)
+  - [Create a component](#create-a-component)
+  - [Set class names with options/properties](#set-class-names-with-optionsproperties)
 
 # Install
 ```sh
 npm install @master/style-element.react
 ```
 
-# Getting started
+# Principle
+Use syntactic sugar to implement functional components faster and styled.
+```tsx
+import React from 'react'
+import el from '@master/style-element.react'
 
-## Basic usage
-```js
-import React from 'react';
-import el from '@master/style-element.react';
-
-const Button = el.button`inline-flex center-content font:14 font:semibold font:white bg:indigo px:18 h:40 r:4`;
+const Button = el.button`inline-flex center-content font:14 font:semibold font:white bg:indigo bg:indigo-54:hover px:18 h:40 r:4`
 
 export default function App() {
     return (
         <Button className="uppercase" disabled>Submit</Button>
-    );
+    )
 }
 ```
 The rendered HTML:
@@ -49,4 +49,34 @@ The rendered HTML:
 </button>
 ```
 
-## Conditional class names
+# Usage
+
+## Create a component
+Let's take a reusable and styled section as an example.
+```tsx
+const Section = el.section`max-w:1200 mx:auto`
+```
+Apply it:
+```tsx
+return (
+    <Section>section 1</Section>
+    <Section>section 2</Section>
+    ...
+)
+```
+
+## Set class names with options/properties
+
+```jsx
+const Button = el.a`
+    bg:${(props) => props.color}
+    inline-flex
+`
+```
+Apply it:
+```tsx
+return (
+    <Button color="blue">...</Button>
+    <Button color="red">...</Button>
+)
+```
