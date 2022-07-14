@@ -28,7 +28,8 @@ module.exports = {
     externals: [
         ...Object.keys(package.peerDependencies || []),
         ...Object.keys(package.dependencies || []),
-        'react'
+        'react',
+        'clsx'
     ],
     mode: 'production',
     optimization: {
@@ -55,7 +56,7 @@ module.exports = {
             name: '@master/style-element.react',
             type: 'umd',
         },
-        globalObject: 'self'
+        globalObject: 'this'
     },
     plugins: [
         new webpack.ProgressPlugin(),
