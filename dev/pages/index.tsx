@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useRef } from 'react';
-import el from '../../dist'
+// @ts-ignore
+import el from '!ts-loader!../../src/index.tsx'
 
 const BasicButton = el.button`inline-flex center-content font:14 font:semibold font:white bg:indigo px:18 h:40 r:4`;
 
