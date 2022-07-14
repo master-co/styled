@@ -46,6 +46,16 @@
   "resolved" "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   "version" "1.2.1"
 
+"@master/css@^1.35.6":
+  "integrity" "sha512-gQ0NHjKelkt+NxyswTNBA0dV2qRLPUptpDp0dgCbKpZuJrOXBmqba6H3aNpVThKP4smizwFLNLr3KRf8gEfPrQ=="
+  "resolved" "https://registry.npmjs.org/@master/css/-/css-1.35.6.tgz"
+  "version" "1.35.6"
+
+"@master/normal.css@^1.9.5":
+  "integrity" "sha512-EbDaRtG3ESmSkLqLoh47Fbzowyr0sADyb+tA0uipjHP2xX1Jj9VZfoB/vp5tABFSvl76o1bhdo9UgU94YRHFjQ=="
+  "resolved" "https://registry.npmjs.org/@master/normal.css/-/normal.css-1.9.5.tgz"
+  "version" "1.9.5"
+
 "@next/env@12.2.2":
   "integrity" "sha512-BqDwE4gDl1F608TpnNxZqrCn6g48MBjvmWFEmeX5wEXDXh3IkAOw6ASKUgjT8H4OUePYFqghDFUss5ZhnbOUjw=="
   "resolved" "https://registry.npmjs.org/@next/env/-/env-12.2.2.tgz"

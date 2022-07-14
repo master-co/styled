@@ -32,7 +32,6 @@
     "devDependencies": {
         "@master/cli": "^1.0.0-alpha.22",
         "@types/react": "^18.0.15",
-        "clsx": "^1.2.1",
         "html-webpack-plugin": "^5.5.0",
         "webpack-dev-server": "^4.6.0"
     },
