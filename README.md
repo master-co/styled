@@ -18,14 +18,18 @@
 
 ###### CONTENTS
 - [Install](#install)
-- [Usage](#usage)
+- [Getting started](#getting-started)
+  - [Basic usage](#basic-usage)
+  - [Conditional class names](#conditional-class-names)
 
 # Install
 ```sh
 npm install @master/style-element.react
 ```
 
-# Usage
+# Getting started
+
+## Basic usage
 ```js
 import React from 'react';
 import el from '@master/style-element.react';
@@ -44,3 +48,5 @@ The rendered HTML:
     Submit
 </button>
 ```
+
+## Conditional class names
