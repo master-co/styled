@@ -20,7 +20,7 @@ const el: {
 function createElement(Tag: string) {
     return (defaultClassNames: TemplateStringsArray) => {
         function component(props: any) {
-            return <Tag {...props} className={clsx(defaultClassNames, props.className)} > </Tag>
+            return <Tag {...props} className={clsx(defaultClassNames, props.className)} />
         }
         component.displayName = Tag
 
