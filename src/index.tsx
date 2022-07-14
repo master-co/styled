@@ -28,4 +28,4 @@ function createElement(Tag: string) {
     }
 }
 
-export { el }
+export default el
