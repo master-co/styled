@@ -20,7 +20,6 @@
         "react"
     ],
     "peerDependencies": {
-        "clsx": ">=1",
         "@types/react": ">=15"
     }
 }
