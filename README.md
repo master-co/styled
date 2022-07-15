@@ -14,17 +14,23 @@
 </p>
 </div>
 
-###### CONTENTS
-- [Install](#install)
-  - [CDN](#cdn)
-- [Usage](#usage)
+On this page
+- [Quick Start](#quick-start)
+  - [1. Download](#1-download)
+  - [2. Import into your js file](#2-import-into-your-js-file)
 
-# Install
+# Quick Start
+
+## 1. Download
 ```sh
 npm install {{ package.name }}
 ```
-## CDN
-<!-- cdns.map((cdn) => `\n- [${cdn.name}](${cdn.href})`).join('') -->
+Or use a CDN
+
+<!-- cdns.map((cdn) => ````html\n<script src="${cdn.href}"></script>\n```).join('') -->
 <!-- -->
 
-# Usage
+## 2. Import into your js file
+```css
+@import '{{ package.name }}';
+```
