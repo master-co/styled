@@ -1,13 +1,20 @@
 import type { NextPage } from 'next'
 // @ts-ignore
-import el from '!ts-loader!../../src/index.tsx'
+import element from '!ts-loader!../../src'
 
-const BasicButton = el.button`inline-flex center-content font:14 font:semibold font:white bg:indigo bg:indigo-54:hover px:18 h:40 r:4`;
+const Button = element.button`
+    inline-flex center-content 
+    ${['font:14', 'font:semibold']}
+    ${{ test: true, test2: false, test3: true}}
+    font:white px:18 h:40 r:4
+    bg:${({ color }: any) => color}
+    bg:${({ color }: any) => color}-54:hover
+`;
 
 const Home: NextPage = () => {
     return (
         <div className="max-w:600 mx:auto p:50">
-            <BasicButton>Basic Button</BasicButton>
+            <Button color="blue">Basic Button</Button>
         </div>
     )
 }
