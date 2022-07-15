@@ -50,11 +50,8 @@ module.exports = {
     },
     output: {
         clean: true,
-        library: {
-            name: '@master/package',
-            type: 'umd',
-        },
-        globalObject: 'self'
+        libraryTarget: 'umd',
+        globalObject: 'this'
     },
     plugins: [
         new webpack.ProgressPlugin(),
