@@ -1,4 +1,6 @@
 <br><br>
+<div align="center">
+
 <p align="center">
     <img src="https://raw.githubusercontent.com/master-co/package/document/images/logo-and-text.svg" alt="logo" width="142">
 </p>
@@ -10,6 +12,7 @@
 <!-- badges.map((badge) => `<a href="${badge.href}"><img src="${badge.src}" alt="${badge.alt}"></a>`).join('&nbsp;')-->
 <!-- -->
 </p>
+</div>
 
 ###### CONTENTS
 - [Install](#install)
