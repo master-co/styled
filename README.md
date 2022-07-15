@@ -9,7 +9,7 @@
 </p>
 <p align="center"><!-- package.description --><!-- --></p>
 <p align="center">
-<!-- badges.map((badge) => `[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
+<!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
 <!-- -->
 </p>
 </div>
