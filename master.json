@@ -32,19 +32,9 @@
             "src": "https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/{{ package.name }}?icon=jsdelivr&label&color=yellow)"
         },
         {
-            "alt": "Documentation",
-            "href": "{{ package.homepage }}",
-            "src": "https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label&color=yellow"
-        },
-        {
             "alt": "Github",
             "href": "https://github.com/{{ github.name }}/{{ name }}",
             "src": "https://flat.badgen.net/badge/icon/{{ github.name }}%2F{{ name }}?icon=github&label&color=yellow)"
-        },
-        {
-            "alt": "Discord",
-            "href": "{{ package.discord }}",
-            "src": "https://flat.badgen.net/badge/icon/discord?icon=discord&label&color=yellow"
         },
         {
             "alt": "CI",

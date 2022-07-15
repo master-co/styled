@@ -8,7 +8,7 @@
     <b><!-- name -->@master/style-element.react<!----></b>
 </p>
 <p align="center">
-<!-- badges.map((badge) => `<a href="${badge.href}"><img src="${badge.src}" alt="${badge.alt}"></a>`).join('&nbsp;')-->
+<!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
 
 [![MIT License](https://flat.badgen.net/github/license/master-co/style-element.react?color=yellow)](https://github.com/master-co/css/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/@master/style-element.react?icon=npm&label&color=yellow)](https://www.npmjs.com/package/@master/style-element.react)
@@ -16,7 +16,7 @@
 [![Package Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/@master/style-element.react?icon=jsdelivr&label&color=yellow)](https://unpkg.com/@master/style-element.react 'brotli package size (without dependencies)')
 [![Github](https://flat.badgen.net/badge/icon/master-co%2Fstyle-element.react?icon=github&label&color=yellow)](https://github.com/master-co/style-element.react)
 [![CI](https://flat.badgen.net/github/status/master-co/style-element.react/main/ci/circleci?icon=circleci)](https://circleci.com/gh/master-co/workflows/style-element.react/tree/main)
-<!---->
+<!-- -->
 </p>
 </div>
 
