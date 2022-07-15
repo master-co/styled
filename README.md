@@ -36,6 +36,9 @@ npm install @master/style-element.react
 Or use a CDN
 
 <!-- cdns.map((cdn) => ````html\n<script src="${cdn.href}"></script>\n```).join('') -->
+```html
+<script src="https://cdn.jsdelivr.net/npm/@master/style-element.react"></script>
+```
 <!---->
 
 ## 2. Import into your js file
