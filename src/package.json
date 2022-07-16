@@ -20,6 +20,7 @@
         "react"
     ],
     "peerDependencies": {
+        "@master/literal": ">=1",
         "@types/react": ">=15"
     }
 }

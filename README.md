@@ -16,7 +16,7 @@
 [![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label&color=yellow)](https://discord.gg/sZNKpAAAw6)
 [![CI](https://flat.badgen.net/github/status/master-co/style-element.react/main/ci/circleci?icon=circleci)](https://circleci.com/gh/master-co/workflows/style-element.react/tree/main)
 
-###### CONTENTS
+###### On this page
 - [Install](#install)
 - [Principle](#principle)
 - [Usage](#usage)
