@@ -19,6 +19,7 @@
         "css",
         "react"
     ],
+    "discord": "https://discord.gg/sZNKpAAAw6",
     "peerDependencies": {
         "@master/literal": ">=1",
         "@types/react": ">=15"

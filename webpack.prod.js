@@ -52,10 +52,7 @@ module.exports = {
     },
     output: {
         clean: true,
-        library: {
-            name: '@master/style-element.react',
-            type: 'umd',
-        },
+        libraryTarget: 'umd',
         globalObject: 'this'
     },
     plugins: [

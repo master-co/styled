@@ -1,20 +1,24 @@
 <br><br>
+<div align="center">
+
 <p align="center">
     <img src="https://raw.githubusercontent.com/master-co/package/document/images/logo-and-text.svg" alt="logo" width="142">
 </p>
 <p align="center">
     <b><!-- name -->@master/style-element.react<!----></b>
 </p>
-<p align="center"><!-- package.description -->Quickly create styled React elements using class names.<!----></p>
+<p align="center">
+<!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
 
-[![MIT License](https://flat.badgen.net/github/license/master-co/style-element.react?color=yellow)](https://github.com/master-co/style-element.react/blob/main/LICENSE)
+[![MIT License](https://flat.badgen.net/github/license/master-co/style-element.react?color=yellow)](https://github.com/master-co/css/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/@master/style-element.react?icon=npm&label&color=yellow)](https://www.npmjs.com/package/@master/style-element.react)
 [![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@master/style-element.react?icon=packagephobia&label&color=yellow)](https://bundlephobia.com/package/@master/style-element.react 'gzip bundle size (including dependencies)')
 [![Package Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/@master/style-element.react?icon=jsdelivr&label&color=yellow)](https://unpkg.com/@master/style-element.react 'brotli package size (without dependencies)')
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label&color=yellow)](https://style-element.react.master.co)
-[![Github](https://flat.badgen.net/badge/icon/master-co%2Fcss?icon=github&label&color=yellow)](https://github.com/master-co/style-element.react)
-[![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label&color=yellow)](https://discord.gg/sZNKpAAAw6)
+[![Github](https://flat.badgen.net/badge/icon/master-co%2Fstyle-element.react?icon=github&label&color=yellow)](https://github.com/master-co/style-element.react)
 [![CI](https://flat.badgen.net/github/status/master-co/style-element.react/main/ci/circleci?icon=circleci)](https://circleci.com/gh/master-co/workflows/style-element.react/tree/main)
+<!-- -->
+</p>
+</div>
 
 ###### On this page
 - [Install](#install)
@@ -23,9 +27,23 @@
   - [Create a component](#create-a-component)
   - [Set class names with options/properties](#set-class-names-with-optionsproperties)
 
-# Install
+# Quick Start
+
+## 1. Download
 ```sh
 npm install @master/style-element.react
+```
+Or use a CDN
+
+<!-- cdns.map((cdn) => ````html\n<script src="${cdn.href}"></script>\n```).join('') -->
+```html
+<script src="https://cdn.jsdelivr.net/npm/@master/style-element.react"></script>
+```
+<!---->
+
+## 2. Import into your js file
+```css
+@import '@master/style-element.react';
 ```
 
 # Principle
@@ -41,42 +59,4 @@ export default function App() {
         <Button className="uppercase" disabled>Submit</Button>
     )
 }
-```
-The rendered HTML:
-```html
-<button className="uppercase inline-flex center-content font:14 font:semibold font:white bg:indigo px:18 h:40 r:4" disabled>
-    Submit
-</button>
-```
-
-# Usage
-
-## Create a component
-Let's take a reusable and styled section as an example.
-```tsx
-const Section = el.section`max-w:1200 mx:auto`
-```
-Apply it:
-```tsx
-return (
-    <Section>section 1</Section>
-    <Section>section 2</Section>
-    ...
-)
-```
-
-## Set class names with options/properties
-
-```jsx
-const Button = el.a`
-    bg:${(props) => props.color}
-    inline-flex
-`
-```
-Apply it:
-```tsx
-return (
-    <Button color="blue">...</Button>
-    <Button color="red">...</Button>
-)
 ```
