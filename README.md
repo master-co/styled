@@ -114,12 +114,14 @@ const Button = el.button`inline-flex font:14`
 const HomeButton = el(Button)`text:center p:12|20`
 
 return (
-    <HomeButton>...</HomeButton>
+    <Button>Button</Button>
+    <HomeButton>Home Button</HomeButton>
 )
 ```
 rendered as:
 ```html
-<button className="inline-flex font:14 text:center p:12|20">...</button>
+<button className="inline-flex font:14">Button</button>
+<button className="inline-flex font:14 text:center p:12|20">Home Button</button>
 ```
 
 ## Transform element tag names
