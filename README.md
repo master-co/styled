@@ -7,6 +7,7 @@
 <p align="center">
     <b><!-- name -->@master/style-element.react<!----></b>
 </p>
+<p align="center"><!-- package.description -->Quickly create styled React elements with conditional class names.<!----></p>
 <p align="center">
 <!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
 
@@ -21,42 +22,125 @@
 </div>
 
 ###### On this page
+
+- [Features and Purpose](#features-and-purpose)
 - [Install](#install)
-- [Principle](#principle)
+- [Import](#import)
 - [Usage](#usage)
-  - [Create a component](#create-a-component)
-  - [Set class names with options/properties](#set-class-names-with-optionsproperties)
+  - [Basic](#basic)
+  - [Add additional class names](#add-additional-class-names)
+  - [Apply class names based on properties](#apply-class-names-based-on-properties)
+  - [Extend styled elements with additional class names](#extend-styled-elements-with-additional-class-names)
+  - [Transform element tag names](#transform-element-tag-names)
+- [Related](#related)
 
-# Quick Start
+# Features and Purpose
+- Styled elements **driven by class names**.
+- Quickly create **reusable** styled elements.
+- Create styled elements with **less code**.
+- **Extend** existing styled elements.
+- **Conditionally construct class names** and strings with template literals. [@master/literal](https://github.com/master-co/literal)
 
-## 1. Download
+# Install
+
 ```sh
 npm install @master/style-element.react
 ```
-Or use a CDN
 
-<!-- cdns.map((cdn) => ````html\n<script src="${cdn.href}"></script>\n```).join('') -->
-```html
-<script src="https://cdn.jsdelivr.net/npm/@master/style-element.react"></script>
-```
-<!---->
-
-## 2. Import into your js file
-```css
-@import '@master/style-element.react';
+# Import
+```js
+import el from '@master/style-element.react';
 ```
 
-# Principle
-Use syntactic sugar to implement functional components faster and styled.
+# Usage
+Make it easier and faster to implement functional components using syntactic sugar.
+
+## Basic
 ```tsx
 import React from 'react'
 import el from '@master/style-element.react'
 
-const Button = el.button`inline-flex center-content font:14 font:semibold font:white bg:indigo bg:indigo-54:hover px:18 h:40 r:4`
+const Button = el.button`inline-flex font:14`
 
 export default function App() {
     return (
-        <Button className="uppercase" disabled>Submit</Button>
+        <Button>...</Button>
     )
 }
 ```
+rendered as:
+```html
+<button className="inline-flex font:14">...</button>
+```
+
+## Add additional class names
+Add `uppercase` for the button here.
+```tsx
+const Button = el.button`inline-flex font:14`
+
+return (
+    <Button className="uppercase">...</Button>
+)
+```
+rendered as:
+```html
+<button className="inline-flex font:14 uppercase">...</button>
+```
+
+## Apply class names based on properties
+```tsx
+const Button = el.button`
+    inline-flex
+    font:14
+    ${(props) => (props.color ? 'font:white bg:' + props.color : '')}
+`
+
+return (
+    <Button color="blue">...</Button>
+    <Button color="red">...</Button>
+    <Button disabled>...</Button>
+)
+```
+rendered as:
+```html
+<button className="inline-flex font:14 font:white bg:blue">...</button>
+<button className="inline-flex font:14 font:white bg:red">...</button>
+<button className="inline-flex font:14" disabled>...</button>
+```
+
+## Extend styled elements with additional class names
+```tsx
+const Button = el.button`inline-flex font:14`
+const HomeButton = el(Button)`text:center p:12|20`
+
+return (
+    <HomeButton>...</HomeButton>
+)
+```
+rendered as:
+```html
+<button className="inline-flex font:14 text:center p:12|20">...</button>
+```
+
+## Transform element tag names
+```tsx
+const Button = el.button`inline-flex font:14` // <button>
+const Anchor = el.a(Button) // <button> -> <a>
+const Link = el.a(Button)`underline` // <button> -> <a> with `underline`
+
+return (
+    <Button>Button</Button>
+    <Anchor href="https://css.master.co" target="blank">Anchor</Anchor>
+    <Link href="#usage">Link</Link>
+)
+```
+rendered as:
+```html
+<button className="inline-flex font:14">Button</button>
+<a className="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
+<a className="inline-flex font:14 underline" href="#usage">Link</a>
+```
+
+# Related
+- [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
+- [@master/css](https://github.com/master-co/css) - A Virtual CSS language with enhanced syntax. ~13KB
