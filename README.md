@@ -23,7 +23,7 @@
 
 ###### On this page
 
-- [Features and Purpose](#features-and-purpose)
+- [Feature and Purpose](#feature-and-purpose)
 - [Install](#install)
 - [Import](#import)
 - [Usage](#usage)
@@ -34,7 +34,7 @@
   - [Transform element tag names](#transform-element-tag-names)
 - [Related](#related)
 
-# Features and Purpose
+# Feature and Purpose
 - Styled elements **driven by class names**.
 - Quickly create **reusable** styled elements.
 - Create styled elements with **less code**.
@@ -56,7 +56,7 @@ import el from '@master/style-element.react';
 Make it easier and faster to implement functional components using syntactic sugar.
 
 ## Basic
-```tsx
+```jsx
 import React from 'react'
 import el from '@master/style-element.react'
 
@@ -75,7 +75,7 @@ rendered as:
 
 ## Add additional class names
 Add `uppercase` for the button here.
-```tsx
+```jsx
 const Button = el.button`inline-flex font:14`
 
 return (
@@ -88,7 +88,7 @@ rendered as:
 ```
 
 ## Apply class names based on properties
-```tsx
+```jsx
 const Button = el.button`
     inline-flex
     font:14
@@ -109,7 +109,7 @@ rendered as:
 ```
 
 ## Extend styled elements with additional class names
-```tsx
+```jsx
 const Button = el.button`inline-flex font:14`
 const HomeButton = el(Button)`text:center p:12|20`
 
@@ -125,7 +125,7 @@ rendered as:
 ```
 
 ## Transform element tag names
-```tsx
+```jsx
 const Button = el.button`inline-flex font:14` // <button>
 const Anchor = el.a(Button) // <button> -> <a>
 const Link = el.a(Button)`underline` // <button> -> <a> with `underline`
