@@ -21,6 +21,23 @@
 </p>
 </div>
 
+🫤 before
+```jsx
+return (
+    <button className="inline-flex font:14">...</div>
+    <button className="inline-flex font:14">...</div>
+)
+```
+😊 after
+```jsx
+const Button = el.button`inline-flex font:14`
+
+return (
+    <Button>...</Button>
+    <Button>...</Button>
+)
+```
+
 ###### On this page
 
 - [Feature and Purpose](#feature-and-purpose)
@@ -128,19 +145,16 @@ rendered as:
 ```jsx
 const Button = el.button`inline-flex font:14` // <button>
 const Anchor = el.a(Button) // <button> -> <a>
-const Link = el.a(Button)`underline` // <button> -> <a> with `underline`
 
 return (
     <Button>Button</Button>
     <Anchor href="https://css.master.co" target="blank">Anchor</Anchor>
-    <Link href="#usage">Link</Link>
 )
 ```
 rendered as:
 ```html
 <button className="inline-flex font:14">Button</button>
 <a className="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
-<a className="inline-flex font:14 underline" href="#usage">Link</a>
 ```
 
 # Related
