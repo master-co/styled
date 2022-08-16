@@ -21,7 +21,7 @@
 </p>
 </div>
 
-🫤 before
+😰 before
 ```jsx
 return (
     <button className="inline-flex font:14">...</div>
@@ -49,6 +49,7 @@ return (
   - [Apply class names based on properties](#apply-class-names-based-on-properties)
   - [Extend styled elements with additional class names](#extend-styled-elements-with-additional-class-names)
   - [Transform element tag names](#transform-element-tag-names)
+- [Inspiration](#inspiration)
 - [Related](#related)
 
 # Feature and Purpose
@@ -156,6 +157,10 @@ rendered as:
 <button className="inline-flex font:14">Button</button>
 <a className="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
 ```
+
+# Inspiration
+Some of our core concepts and designs are inspired by these giants.
+- **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).
 
 # Related
 - [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
