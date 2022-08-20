@@ -8,14 +8,18 @@ type TagParams = Array<[TemplateStringsArray, any[]]>;
 
 type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
 type MasterComponentProps<K extends IntrinsicElementsKeys> = Omit<JSX.IntrinsicElements[K], 'className'> & extraType;
-type MasterExoticComponent<K extends IntrinsicElementsKeys> = React.ForwardRefExoticComponent<PropsWithoutRef<MasterComponentProps<K>> & React.RefAttributes<K>> & { tag?: K, params?: TagParams };
+type MasterExoticComponent<K extends IntrinsicElementsKeys> = React.ForwardRefExoticComponent<PropsWithoutRef<MasterComponentProps<K>> & React.RefAttributes<K>> & { tag: K, params: TagParams };
 type ParamsType<K extends IntrinsicElementsKeys> = Array<((props: MasterComponentProps<K>) => baseLoopType | undefined) | baseLoopType>;
 type ReturnType<K extends IntrinsicElementsKeys> = <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<K> : never) => (F extends TemplateStringsArray ? MasterExoticComponent<K> : ReturnType<K>);
 
 const element: {
-    [key in IntrinsicElementsKeys]: <F extends TemplateStringsArray | MasterExoticComponent<any>>(defaultClassNames: F, ...params: ParamsType<key>) => F extends TemplateStringsArray ? MasterExoticComponent<key> : ReturnType<key>
-} & { <K extends IntrinsicElementsKeys>(Element: MasterExoticComponent<K>): ReturnType<K> } = new Proxy(
-    ((Element) => handle(Element.tag, Element.params, Element.displayName)) as any,
+    [key in IntrinsicElementsKeys]: <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<key> : never) => (F extends TemplateStringsArray ? MasterExoticComponent<key> : ReturnType<key>)
+} & { <F extends TemplateStringsArray | MasterExoticComponent<IntrinsicElementsKeys>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<'div'> : never): (F extends TemplateStringsArray ? MasterExoticComponent<'div'> : F extends MasterExoticComponent<infer U> ? ReturnType<U> : never) } = new Proxy(
+    ((firstParam, ...params) => {
+        return (Array.isArray(firstParam) && 'raw' in firstParam)
+            ? element.div(firstParam as any, ...params)
+            : handle(firstParam.tag, firstParam.params, firstParam.displayName)
+    }) as any,
     {
         get: function (target, Tag: IntrinsicElementsKeys) {
             if (!(Tag in target)) {
@@ -29,7 +33,7 @@ const element: {
 function handle<K extends IntrinsicElementsKeys>(Tag: K, tagParams: TagParams, displayName: string) {
     const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
         const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]];
-        const component: MasterExoticComponent<K> = forwardRef<K, MasterComponentProps<K>>((props, ref) => {
+        const component = forwardRef<K, MasterComponentProps<K>>((props, ref) => {
             const classNames = [];
             for (const eachNewTagParam of newTagParams) {
                 const newParams = [...eachNewTagParam[1]];
@@ -44,7 +48,7 @@ function handle<K extends IntrinsicElementsKeys>(Tag: K, tagParams: TagParams, d
     
             //@ts-ignore
             return <Tag ref={ref} {...props} className={$(classNames, props.className)} />;
-        });
+        }) as MasterExoticComponent<K>;
 
         component.displayName = displayName;
         component.tag = Tag;
@@ -59,7 +63,7 @@ function handle<K extends IntrinsicElementsKeys>(Tag: K, tagParams: TagParams, d
             newTagParams = [...newTagParams, ...firstParam.params]
         }
         return Array.isArray(firstParam) && 'raw' in firstParam
-            ? generateFunctionComponent(params[0], ...params.slice(1))
+            ? generateFunctionComponent(firstParam, ...params.slice(1))
             : handle(Tag, newTagParams, firstParam.displayName);
     };
 }
