@@ -142,6 +142,7 @@ rendered as:
 <button className="inline-flex font:14">Button</button>
 <a className="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
 ```
+⚠️ The target to transform only accept styled elements.
 
 ## Extend styled elements
 ```jsx
@@ -170,6 +171,7 @@ rendered as:
 <a className="inline-flex font:14 italic">Button 2</a>
 <button className="inline-flex font:14 text:center italic font:bold">Button 3</button>
 ```
+⚠️ The target to extend only accept styled elements.
 
 # Inspiration
 Some of our core concepts and designs are inspired by these giants.
