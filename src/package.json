@@ -1,6 +1,6 @@
 {
     "name": "@master/style-element.react",
-    "description": "Quickly create styled React elements with conditional class names. ~800B",
+    "description": "Quickly create reusable React elements driven by class names. ~800B",
     "author": "Aoyue Design LLC.",
     "main": "index.js",
     "types": "index.d.ts",
@@ -17,7 +17,12 @@
         "component",
         "element",
         "css",
-        "react"
+        "react",
+        "styled-component",
+        "class-name",
+        "reactjs",
+        "nextjs",
+        "solidjs"
     ],
     "discord": "https://discord.gg/sZNKpAAAw6",
     "peerDependencies": {

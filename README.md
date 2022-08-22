@@ -7,7 +7,7 @@
 <p align="center">
     <b><!-- name -->@master/style-element.react<!----></b>
 </p>
-<p align="center"><!-- package.description -->Quickly create styled React elements with conditional class names. ~800B<!----></p>
+<p align="center"><!-- package.description -->Quickly create reusable React elements driven by class names. ~800B<!----></p>
 <p align="center">
 <!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
 
