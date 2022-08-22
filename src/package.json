@@ -21,7 +21,7 @@
     ],
     "discord": "https://discord.gg/sZNKpAAAw6",
     "peerDependencies": {
-        "@master/literal": ">=1",
+        "@master/literal": ">=1.0.7",
         "@types/react": ">=15"
     }
 }
