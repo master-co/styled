@@ -7,7 +7,7 @@
 <p align="center">
     <b><!-- name -->@master/style-element.react<!----></b>
 </p>
-<p align="center"><!-- package.description -->Quickly create styled React elements with conditional class names.<!----></p>
+<p align="center"><!-- package.description -->Quickly create styled React elements with conditional class names. ~800B<!----></p>
 <p align="center">
 <!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
 
@@ -40,24 +40,24 @@ return (
 
 ###### On this page
 
-- [Feature and Purpose](#feature-and-purpose)
+- [Features](#features)
 - [Install](#install)
 - [Import](#import)
 - [Usage](#usage)
-  - [Basic](#basic)
-  - [Add additional class names](#add-additional-class-names)
+  - [Create a basic styled element](#create-a-basic-styled-element)
+  - [Apply additional class names](#apply-additional-class-names)
   - [Apply class names based on properties](#apply-class-names-based-on-properties)
-  - [Extend styled elements with additional class names](#extend-styled-elements-with-additional-class-names)
-  - [Transform element tag names](#transform-element-tag-names)
+  - [Transform tag names](#transform-tag-names)
+  - [Extend styled elements](#extend-styled-elements)
 - [Inspiration](#inspiration)
 - [Related](#related)
 
-# Feature and Purpose
+# Features
 - Styled elements **driven by class names**.
 - Quickly create **reusable** styled elements.
 - Create styled elements with **less code**.
 - **Extend** existing styled elements.
-- **Conditionally construct class names** and strings with template literals. [@master/literal](https://github.com/master-co/literal)
+- **Conditionally construct class names** and strings with template literals.
 
 # Install
 
@@ -73,7 +73,7 @@ import el from '@master/style-element.react';
 # Usage
 Make it easier and faster to implement functional components using syntactic sugar.
 
-## Basic
+## Create a basic styled element
 ```jsx
 import React from 'react'
 import el from '@master/style-element.react'
@@ -91,7 +91,7 @@ rendered as:
 <button className="inline-flex font:14">...</button>
 ```
 
-## Add additional class names
+## Apply additional class names
 Add `uppercase` for the button here.
 ```jsx
 const Button = el.button`inline-flex font:14`
@@ -126,26 +126,11 @@ rendered as:
 <button className="inline-flex font:14" disabled>...</button>
 ```
 
-## Extend styled elements with additional class names
-```jsx
-const Button = el.button`inline-flex font:14`
-const HomeButton = el(Button)`text:center p:12|20`
-
-return (
-    <Button>Button</Button>
-    <HomeButton>Home Button</HomeButton>
-)
-```
-rendered as:
-```html
-<button className="inline-flex font:14">Button</button>
-<button className="inline-flex font:14 text:center p:12|20">Home Button</button>
-```
-
-## Transform element tag names
+## Transform tag names
+If you just want to transform a styled element tag name, leave `` empty.
 ```jsx
 const Button = el.button`inline-flex font:14` // <button>
-const Anchor = el.a(Button) // <button> -> <a>
+const Anchor = el.a(Button)`` // <button> -> <a>
 
 return (
     <Button>Button</Button>
@@ -158,10 +143,38 @@ rendered as:
 <a className="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
 ```
 
+## Extend styled elements
+```jsx
+const Button = el.button`inline-flex font:14`
+
+ // extend Button with addtional class names
+const Button1 = el(Button)`text:center`
+
+// extend Button with addtional class names and transform it into <a>
+const Button2 = el.a(Button)`italic`
+
+// extend Button1 and Button2 with addtional class names
+const Button3 = el(Button1)(Button2)`font:bold`
+
+return (
+    <Button>Button</Button>
+    <Button1>Button 1</Button1>
+    <Button2>Button 2</Button2>
+    <Button3>Button 3</Button3>
+)
+```
+rendered as:
+```html
+<button className="inline-flex font:14">Button</button>
+<button className="inline-flex font:14 text:center">Button 1</button>
+<a className="inline-flex font:14 italic">Button 2</a>
+<button className="inline-flex font:14 text:center italic font:bold">Button 3</button>
+```
+
 # Inspiration
 Some of our core concepts and designs are inspired by these giants.
 - **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).
 
 # Related
-- [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
 - [@master/css](https://github.com/master-co/css) - A Virtual CSS language with enhanced syntax. ~13KB
+- [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
