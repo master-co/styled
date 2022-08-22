@@ -5,7 +5,7 @@
     "main": "index.js",
     "types": "index.d.ts",
     "funding": "https://docs.master.co/css/donate",
-    "homepage": "https://css.master.co",
+    "homepage": "https://docs.master.co/css/reusing-design#abstracted-into-elements",
     "license": "MIT",
     "private": false,
     "repository": {
