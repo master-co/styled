@@ -159,6 +159,7 @@ const Button3 = el(Button1)(Button2)`font:bold`
 return (
     <Button>Button</Button>
     <Button1>Button 1</Button1>
+    <Button2>Button 2</Button2>
     <Button3>Button 3</Button3>
 )
 ```
