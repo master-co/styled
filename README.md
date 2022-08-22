@@ -167,7 +167,7 @@ rendered as:
 <button className="inline-flex font:14">Button</button>
 <button className="inline-flex font:14 text:center">Button 1</button>
 <a className="inline-flex font:14 italic">Button 2</a>
-<button className="inline-flex font:14 text:center italic">Button 3</button>
+<button className="inline-flex font:14 text:center italic font:bold">Button 3</button>
 ```
 
 # Inspiration
