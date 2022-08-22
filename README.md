@@ -21,14 +21,14 @@
 </p>
 </div>
 
-😰 before
+😰 Before
 ```jsx
 return (
     <button className="inline-flex font:14">...</div>
     <button className="inline-flex font:14">...</div>
 )
 ```
-😊 after
+😊 After
 ```jsx
 const Button = el.button`inline-flex font:14`
 
