@@ -36,13 +36,17 @@ function Button(props) {
 const Button = el.button`inline-flex font:14`
 ```
 ---
-Then apply it as usual:
+then apply it as usual:
 ```jsx
 export default function App() {
     return (
         <Button className="uppercase">submit</Button>
     )
 }
+```
+will be rendered as:
+```html
+<button class="inline-flex font:14 uppercase">submit</button>
 ```
 
 ###### On this page
