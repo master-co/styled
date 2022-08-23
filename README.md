@@ -95,7 +95,7 @@ export default function App() {
 ```
 rendered as:
 ```html
-<button className="inline-flex font:14">...</button>
+<button class="inline-flex font:14">...</button>
 ```
 
 ## Apply additional class names
@@ -109,7 +109,7 @@ return (
 ```
 rendered as:
 ```html
-<button className="inline-flex font:14 uppercase">...</button>
+<button class="inline-flex font:14 uppercase">...</button>
 ```
 
 ## Apply class names based on properties
@@ -128,9 +128,9 @@ return (
 ```
 rendered as:
 ```html
-<button className="inline-flex font:14 font:white bg:blue">...</button>
-<button className="inline-flex font:14 font:white bg:red">...</button>
-<button className="inline-flex font:14" disabled>...</button>
+<button class="inline-flex font:14 font:white bg:blue">...</button>
+<button class="inline-flex font:14 font:white bg:red">...</button>
+<button class="inline-flex font:14" disabled>...</button>
 ```
 
 ## Transform tag names
@@ -146,8 +146,8 @@ return (
 ```
 rendered as:
 ```html
-<button className="inline-flex font:14">Button</button>
-<a className="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
+<button class="inline-flex font:14">Button</button>
+<a class="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
 ```
 ⚠️ The target to transform only accept styled elements.
 
@@ -173,10 +173,10 @@ return (
 ```
 rendered as:
 ```html
-<button className="inline-flex font:14">Button</button>
-<button className="inline-flex font:14 text:center">Button 1</button>
-<a className="inline-flex font:14 italic">Button 2</a>
-<button className="inline-flex font:14 text:center italic font:bold">Button 3</button>
+<button class="inline-flex font:14">Button</button>
+<button class="inline-flex font:14 text:center">Button 1</button>
+<a class="inline-flex font:14 italic">Button 2</a>
+<button class="inline-flex font:14 text:center italic font:bold">Button 3</button>
 ```
 ⚠️ The target to extend only accept styled elements.
 
