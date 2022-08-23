@@ -21,21 +21,28 @@
 </p>
 </div>
 
-😰 Before
+🔴 Traditionally, you would extract a reusable element into a functional component.
 ```jsx
-return (
-    <button className="inline-flex font:14">...</div>
-    <button className="inline-flex font:14">...</div>
-)
+function Button(props) {
+    return (
+        <button {...props} className={"inline-flex font:14" + (props.className ? ' ' + props.className : '')}>
+            {props.children}
+        </button>
+    )
+}
 ```
-😊 After
+🟢 Now, implement the same in one line with **~80% code less**
 ```jsx
 const Button = el.button`inline-flex font:14`
-
-return (
-    <Button>...</Button>
-    <Button>...</Button>
-)
+```
+---
+Then apply it as usual:
+```jsx
+export default function App() {
+    return (
+        <Button className="uppercase">submit</Button>
+    )
+}
 ```
 
 ###### On this page
