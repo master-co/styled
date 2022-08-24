@@ -1,4 +1,4 @@
-</br>
+<br></br>
 <div align="center">
 
 <p align="center">
@@ -16,6 +16,7 @@
 [![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@master/style-element.react?icon=packagephobia&label&color=yellow)](https://bundlephobia.com/package/@master/style-element.react 'gzip bundle size (including dependencies)')
 [![Package Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/@master/style-element.react?icon=jsdelivr&label&color=yellow)](https://unpkg.com/@master/style-element.react 'brotli package size (without dependencies)')
 [![Github](https://flat.badgen.net/badge/icon/master-co%2Fstyle-element.react?icon=github&label&color=yellow)](https://github.com/master-co/style-element.react)
+[![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label&color=yellow)](https://discord.gg/sZNKpAAAw6)
 [![CI](https://flat.badgen.net/github/status/master-co/style-element.react/main/ci/circleci?icon=circleci)](https://circleci.com/gh/master-co/workflows/style-element.react/tree/main)
 <!-- -->
 </p>
@@ -158,7 +159,7 @@ rendered as:
 <button class="inline-flex font:14">Button</button>
 <a class="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
 ```
-⚠️ The target to transform only accept styled elements.
+⚠️ Extended sources only accept styled elements.
 
 ## Extend styled elements
 ```jsx
@@ -187,12 +188,12 @@ rendered as:
 <a class="inline-flex font:14 italic">Button 2</a>
 <button class="inline-flex font:14 text:center italic font:bold">Button 3</button>
 ```
-⚠️ The target to extend only accept styled elements.
-
-# Inspiration
-Some of our core concepts and designs are inspired by these giants.
-- **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).
+⚠️ Extended sources only accept styled elements.
 
 # Related
 - [@master/css](https://github.com/master-co/css) - A Virtual CSS language with enhanced syntax. ~13KB
 - [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
+
+# Inspiration
+Some of our core concepts and designs are inspired by these giants.
+- **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).
