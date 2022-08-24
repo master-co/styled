@@ -1,4 +1,4 @@
-<br><br>
+</br>
 <div align="center">
 
 <p align="center">
@@ -24,6 +24,7 @@
 
 </div>
 
+</br>
 
 🔴 Traditionally, you would extract a reusable element into a functional component.
 ```jsx
