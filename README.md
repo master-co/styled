@@ -19,7 +19,11 @@
 [![CI](https://flat.badgen.net/github/status/master-co/style-element.react/main/ci/circleci?icon=circleci)](https://circleci.com/gh/master-co/workflows/style-element.react/tree/main)
 <!-- -->
 </p>
+
+<img width="908" alt="Xnapper-2022-08-24-13 09 49" src="https://user-images.githubusercontent.com/33840671/186334385-7bd65ff3-3906-410b-af55-aec7e393e20d.png">
+
 </div>
+
 
 🔴 Traditionally, you would extract a reusable element into a functional component.
 ```jsx
