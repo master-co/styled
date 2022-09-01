@@ -45,9 +45,16 @@ function handle<K extends IntrinsicElementsKeys>(Tag: K, tagParams: TagParams, d
 
                 classNames.push($(eachNewTagParam[0], ...newParams));
             }
+
+            const newProps: Record<string, any> = {};
+            for (const key in props) {
+                if (!key.startsWith('$')) {
+                    newProps[key] = props[key];
+                }
+            }
     
             //@ts-ignore
-            return <Tag ref={ref} {...props} className={$(classNames, props.className)} />;
+            return <Tag ref={ref} {...newProps} className={$(classNames, props.className)} />;
         }) as MasterExoticComponent<K>;
 
         component.displayName = displayName;
