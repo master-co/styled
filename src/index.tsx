@@ -14,7 +14,7 @@ type ReturnType<K extends IntrinsicElementsKeys> = <F extends TemplateStringsArr
 
 const element: {
     [key in IntrinsicElementsKeys]: <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<key> : never) => (F extends TemplateStringsArray ? MasterExoticComponent<key> : ReturnType<key>)
-} & { <F extends TemplateStringsArray | MasterExoticComponent<IntrinsicElementsKeys>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<'div'> : never): (F extends TemplateStringsArray ? MasterExoticComponent<'div'> : F extends MasterExoticComponent<infer U> ? ReturnType<U> : never) } = new Proxy(
+} & { <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<'div'> : never): (F extends TemplateStringsArray ? MasterExoticComponent<'div'> : F extends MasterExoticComponent<infer U> ? ReturnType<U> : never) } = new Proxy(
     ((firstParam, ...params) => {
         return (Array.isArray(firstParam) && 'raw' in firstParam)
             ? element.div(firstParam as any, ...params)
