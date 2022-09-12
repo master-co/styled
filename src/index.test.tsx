@@ -1,0 +1,24 @@
+import element from './index'
+import React from 'react'
+import * as ReactDOMServer from 'react-dom/server'
+
+const Button = element.button`
+    inline-flex center-content 
+    ${['font:14', 'font:semibold']}
+    ${{ test: true, test2: false, test3: true}}
+    font:white px:18 h:40 r:4
+    bg:${({ $color }: any) => $color}
+`
+
+test("Basic", () => {
+    expect(ReactDOMServer.renderToStaticMarkup(<Button $color="red">Basic</Button>)).toBe(`<button class=\"inline-flex center-content font:14 font:semibold test test3 font:white px:18 h:40 r:4 bg:red\">Basic</button>`)
+})
+
+test("Extend", () => {
+    const ExtendButton = element(Button)`bg:${({ $color }: any) => $color}-54:hover`;
+    expect(ReactDOMServer.renderToStaticMarkup(<ExtendButton $color="blue">Extend</ExtendButton>)).toBe(`<button class=\"inline-flex center-content font:14 font:semibold test test3 font:white px:18 h:40 r:4 bg:blue bg:blue-54:hover\">Extend</button>`)
+
+    const AButton = element.a(Button)``;
+    expect(ReactDOMServer.renderToStaticMarkup(<AButton $color="purple">Tag Extend</AButton>)).toBe(`<a class=\"inline-flex center-content font:14 font:semibold test test3 font:white px:18 h:40 r:4 bg:purple\">Tag Extend</a>`)
+})
+
