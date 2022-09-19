@@ -7,18 +7,39 @@ type extraType = { className?: baseLoopType | undefined, [key: string]: any };
 type TagParams = Array<[TemplateStringsArray, any[]]>;
 
 type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
-type MasterComponentProps<K extends IntrinsicElementsKeys> = Omit<JSX.IntrinsicElements[K], 'className'> & extraType;
-type MasterExoticComponent<K extends IntrinsicElementsKeys> = React.ForwardRefExoticComponent<PropsWithoutRef<MasterComponentProps<K>> & React.RefAttributes<K>> & { tag: K, params: TagParams };
-type ParamsType<K extends IntrinsicElementsKeys> = Array<((props: MasterComponentProps<K>) => baseLoopType | undefined) | baseLoopType>;
-type ReturnType<K extends IntrinsicElementsKeys> = <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<K> : never) => (F extends TemplateStringsArray ? MasterExoticComponent<K> : ReturnType<K>);
+type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<any>> = Omit<K extends IntrinsicElementsKeys 
+    ? JSX.IntrinsicElements[K] 
+    : K extends React.ComponentType<infer U>
+        ? U
+        : never, 'className'> & extraType;
+type MasterExoticComponent<K extends IntrinsicElementsKeys | React.ComponentType<any>> = React.ForwardRefExoticComponent<PropsWithoutRef<MasterComponentProps<K>> & React.RefAttributes<K>> & { tag: K, params: TagParams };
+
+type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>> = Array<((props: MasterComponentProps<K>) => baseLoopType | undefined) | baseLoopType>;
+type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>> = <F extends TemplateStringsArray | MasterExoticComponent<any>>(
+    firstParam: F, 
+    ...params: F extends TemplateStringsArray ? ParamsType<K> : never
+) => (F extends TemplateStringsArray 
+    ? MasterExoticComponent<K> 
+    : ReturnType<K>);
 
 const element: {
     [key in IntrinsicElementsKeys]: <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<key> : never) => (F extends TemplateStringsArray ? MasterExoticComponent<key> : ReturnType<key>)
-} & { <F extends TemplateStringsArray | MasterExoticComponent<any>>(firstParam: F, ...params: F extends TemplateStringsArray ? ParamsType<'div'> : never): (F extends TemplateStringsArray ? MasterExoticComponent<'div'> : F extends MasterExoticComponent<infer U> ? ReturnType<U> : never) } = new Proxy(
+} & { 
+    <F extends TemplateStringsArray | MasterExoticComponent<any> | React.ComponentType<any>>(
+        firstParam: F, 
+        ...params: F extends TemplateStringsArray ? ParamsType<'div'> : never
+    ): (F extends TemplateStringsArray 
+        ? MasterExoticComponent<'div'> 
+        : F extends MasterExoticComponent<infer U> 
+            ? ReturnType<U> 
+            : F extends React.ComponentType<any>
+                ? ReturnType<F>
+                : never);
+} = new Proxy(
     ((firstParam, ...params) => {
         return (Array.isArray(firstParam) && 'raw' in firstParam)
             ? element.div(firstParam as any, ...params)
-            : handle(firstParam.tag, firstParam.params, firstParam.displayName)
+            : handle(firstParam.tag ?? firstParam, firstParam.params, firstParam.displayName)
     }) as any,
     {
         get: function (target, Tag: IntrinsicElementsKeys) {
@@ -30,7 +51,7 @@ const element: {
     }
 );
 
-function handle<K extends IntrinsicElementsKeys>(Tag: K, tagParams: TagParams, displayName: string) {
+function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>>(Tag: K, tagParams: TagParams, displayName: string) {
     const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
         const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]];
         const component = forwardRef<K, MasterComponentProps<K>>((props, ref) => {
@@ -53,7 +74,7 @@ function handle<K extends IntrinsicElementsKeys>(Tag: K, tagParams: TagParams, d
                 }
             }
     
-            //@ts-ignore
+            // @ts-ignore
             return <Tag ref={ref} {...newProps} className={$(classNames, props.className)} />;
         }) as MasterExoticComponent<K>;
 

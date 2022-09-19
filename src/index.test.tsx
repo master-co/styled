@@ -14,11 +14,15 @@ test("Basic", () => {
     expect(ReactDOMServer.renderToStaticMarkup(<Button $color="red">Basic</Button>)).toBe(`<button class=\"inline-flex center-content font:14 font:semibold test test3 font:white px:18 h:40 r:4 bg:red\">Basic</button>`)
 })
 
-test("Extend", () => {
+test("Extend", () => { 
     const ExtendButton = element(Button)`bg:${({ $color }: any) => $color}-54:hover`;
     expect(ReactDOMServer.renderToStaticMarkup(<ExtendButton $color="blue">Extend</ExtendButton>)).toBe(`<button class=\"inline-flex center-content font:14 font:semibold test test3 font:white px:18 h:40 r:4 bg:blue bg:blue-54:hover\">Extend</button>`)
 
     const AButton = element.a(Button)``;
     expect(ReactDOMServer.renderToStaticMarkup(<AButton $color="purple">Tag Extend</AButton>)).toBe(`<a class=\"inline-flex center-content font:14 font:semibold test test3 font:white px:18 h:40 r:4 bg:purple\">Tag Extend</a>`)
+
+    const CustomComponent = (props: any) => <a {...props}></a>
+    const ExtendCustomComponent = element(CustomComponent)`inline-flex center-content font:14 font:semibold ${(props) => props.$type}`;
+    expect(ReactDOMServer.renderToStaticMarkup(<ExtendCustomComponent $type="CustomType">Extend Custom Component</ExtendCustomComponent>)).toBe(`<a class=\"inline-flex center-content font:14 font:semibold CustomType\">Extend Custom Component</a>`)
 })
 
