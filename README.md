@@ -66,8 +66,8 @@ will be rendered as:
   - [Apply class names based on properties](#apply-class-names-based-on-properties)
   - [Transform tag names](#transform-tag-names)
   - [Extend styled elements](#extend-styled-elements)
-- [Inspiration](#inspiration)
 - [Related](#related)
+- [Inspiration](#inspiration)
 
 # Features
 - Styled elements **driven by class names**.
@@ -127,7 +127,7 @@ rendered as:
 const Button = el.button`
     inline-flex
     font:14
-    ${(props) => (props.color ? 'font:white bg:' + props.color : '')}
+    ${({color}) => color && `font:white bg:${color}`)}
 `
 
 return (
