@@ -123,16 +123,17 @@ rendered as:
 ```
 
 ## Apply class names based on properties
+If the custom property name isn't the part of the element, you must prefix it with `$` to prevent it from being reflected to the element's attribute or getting type errors.
 ```jsx
 const Button = el.button`
     inline-flex
     font:14
-    ${({color}) => color && `font:white bg:${color}`)}
+    ${({$color}) => $color && `font:white bg:${$color}`)}
 `
 
 return (
-    <Button color="blue">...</Button>
-    <Button color="red">...</Button>
+    <Button $color="blue">...</Button>
+    <Button $color="red">...</Button>
     <Button disabled>...</Button>
 )
 ```
