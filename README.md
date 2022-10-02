@@ -128,7 +128,7 @@ If the custom property name isn't the part of the element, you must prefix it wi
 const Button = el.button`
     inline-flex
     font:14
-    ${({$color}) => $color && `font:white bg:${$color}`)}
+      ${({$color}) => $color && `font:white bg:${$color}`}
 `
 
 return (
@@ -160,6 +160,36 @@ rendered as:
 <button class="inline-flex font:14">Button</button>
 <a class="inline-flex font:14" href="https://css.master.co" target="blank">Anchor</a>
 ```
+
+## Props Types
+```tsx
+
+interface BtnProps {
+    color?: string | undefined,
+    bgColor?: string | undefined,
+    pY?: string | undefined,
+    pX?: string | undefined,
+}
+
+const Button = el.button<TemplateStringsArray, BtnProps>`
+    ${(props) => `
+    font:${props?.color}
+    bg:${props?.bgColor}
+    px:${props?.pX}
+    py:${props?.pY}
+    `}
+`
+
+return (
+    <>
+    <Button $color="black" $bgColor="red-80" $pY="10" $pX="10" >Click Me</Button>
+    </>
+)
+
+
+```
+
+
 ⚠️ Extended sources only accept styled elements.
 
 ## Extend styled elements
