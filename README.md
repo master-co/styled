@@ -64,7 +64,7 @@ The Master Style Element community can be found here:
 - [Discuss on GitHub](https://github.com/master-co/css/discussions) - Ask questions, voice ideas, and do any other discussion
 - [Join our Discord Server](https://discord.com/invite/sZNKpAAAw6) - Casually chat with other people using the language <sup><sub>✓ 中文</sub></sup>
 
-<sub>Our [《 Code of Conduct 》](https://github.com/master-co/css/blob/main/.github/CODE_OF_CONDUCT.md) applies to all Master Style Element community channels.</sub>
+<sub>Our [《 Code of Conduct 》](https://github.com/master-co/style-element/blob/main/.github/CODE_OF_CONDUCT.md) applies to all Master Style Element community channels.</sub>
 
 ## Contributing
 Please see our *🚧 CONTRIBUTING.md* for workflow.
