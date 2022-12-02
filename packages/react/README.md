@@ -50,9 +50,9 @@
     </a>
 </p>
 
-</div>
-
 <img width="908" alt="Xnapper-2022-08-24-13 09 49" src="https://user-images.githubusercontent.com/33840671/186334385-7bd65ff3-3906-410b-af55-aec7e393e20d.png">
+
+</div>
 
 </div>
 
@@ -63,6 +63,8 @@
 - **Conditionally construct class names** and strings with template literals.
 
 </br>
+
+## Concepts
 
 🔴 Traditionally, you would extract a reusable element into a functional component.
 ```jsx
@@ -206,9 +208,5 @@ rendered as:
 ⚠️ Extended sources only accept styled elements.
 
 ## Related
-- [@master/style-element.react](https://github.com/master-co/style-element) - A Virtual CSS language with enhanced syntax. ~13KB
+- [@master/css](https://github.com/master-co/css) - A Virtual CSS language with enhanced syntax ~13KB
 - [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
-
-## Inspiration
-Some of our core concepts and designs are inspired by these giants.
-- **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).

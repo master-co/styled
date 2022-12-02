@@ -64,8 +64,12 @@ The Master Style Element community can be found here:
 - [Discuss on GitHub](https://github.com/master-co/css/discussions) - Ask questions, voice ideas, and do any other discussion
 - [Join our Discord Server](https://discord.com/invite/sZNKpAAAw6) - Casually chat with other people using the language <sup><sub>✓ 中文</sub></sup>
 
-<sub>Our [《 Code of Conduct 》](https://github.com/master-co/css/blob/main/CODE_OF_CONDUCT.md) applies to all Master CSS community channels.</sub>
+<sub>Our [《 Code of Conduct 》](https://github.com/master-co/css/blob/main/.github/CODE_OF_CONDUCT.md) applies to all Master Style Element community channels.</sub>
 
 ## Contributing
 Please see our *🚧 CONTRIBUTING.md* for workflow.
 <!-- Please see our [🚧 CONTRIBUTING.md](https://github.com/master-co/css/blob/beta/.github/CONTRIBUTING.yml) for workflow. -->
+
+## Inspiration
+Some of our core concepts and designs are inspired by these giants.
+- **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).
