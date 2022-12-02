@@ -8,15 +8,15 @@
         "publish": "turbo run publish --parallel --filter=./packages/*",
         "type-check": "turbo run type-check --parallel --filter=./packages/*",
         "dev": "turbo run dev --filter=./packages/*",
-        "clean": "rm -rf ./packages/**/*dist",
-        "aron": "aron"
+        "clean": "rm -rf ./packages/**/*dist"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/master-co/style-element.git"
     },
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "examples/*"
     ],
     "devDependencies": {
         "aronrepo": "^1.0.0-beta.29"

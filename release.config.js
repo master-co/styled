@@ -1,6 +1,3 @@
-const configure = require('semantic-release-config-aron/configure')
-
-module.exports = configure({
-    assets: [
-    ]
-})
+module.exports = {
+    extends: 'semantic-release-config-aron'
+}
