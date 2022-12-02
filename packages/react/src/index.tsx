@@ -99,6 +99,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
             newTagParams = [...newTagParams, ...firstParam.params]
         }
         return Array.isArray(firstParam) && 'raw' in firstParam
+            // @ts-ignore
             ? generateFunctionComponent(firstParam, ...params.slice(1))
             : handle(Tag, newTagParams, firstParam.displayName)
     }
