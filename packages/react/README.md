@@ -1,29 +1,66 @@
-<br></br>
+<br>
 <div align="center">
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/master-co/package/document/images/logo-and-text.svg" alt="logo" width="142">
+    <a href="https://master.co">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/33840671/205238939-3cf526f7-8d92-4fa0-8ca3-6c7e4c545f9c.svg">
+            <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/33840671/205238945-3295c4f5-a88a-4b58-bca9-770fe7bf894e.svg">
+            <img alt="Master CSS" src="https://user-images.githubusercontent.com/33840671/205238945-3295c4f5-a88a-4b58-bca9-770fe7bf894e.svg" width="100%">
+        </picture>
+    </a>
 </p>
-<p align="center">
-    <b><!-- name -->@master/style-element.react<!----></b>
-</p>
-<p align="center"><!-- package.description -->Quickly create reusable React elements driven by class names. ~800B<!----></p>
-<p align="center">
-<!-- badges.map((badge) => `\n[![${badge.alt}](${badge.src})](${badge.href})`).join('&nbsp;')-->
+<p align="center">Quickly create reusable React elements driven by class names ~800B</p>
 
-[![MIT License](https://flat.badgen.net/github/license/master-co/style-element.react?color=yellow)](https://github.com/master-co/css/blob/main/LICENSE)
-[![Latest Release](https://flat.badgen.net/npm/v/@master/style-element.react?icon=npm&label&color=yellow)](https://www.npmjs.com/package/@master/style-element.react)
-[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@master/style-element.react?icon=packagephobia&label&color=yellow)](https://bundlephobia.com/package/@master/style-element.react 'gzip bundle size (including dependencies)')
-[![Package Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/@master/style-element.react?icon=jsdelivr&label&color=yellow)](https://unpkg.com/@master/style-element.react 'brotli package size (without dependencies)')
-[![Github](https://flat.badgen.net/badge/icon/master-co%2Fstyle-element.react?icon=github&label&color=yellow)](https://github.com/master-co/style-element.react)
-[![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label&color=yellow)](https://discord.gg/sZNKpAAAw6)
-[![CI](https://flat.badgen.net/github/status/master-co/style-element.react/main/ci/circleci?icon=circleci)](https://circleci.com/gh/master-co/workflows/style-element.react/tree/main)
-<!-- -->
+<p align="center">
+    <a aria-label="GitHub release (latest by date including pre-releases)" href="https://github.com/master-co/style-element/releases">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/github/v/release/master-co/style-element?include_prereleases&color=212022&label=&style=for-the-badge&logo=github&logoColor=fff">
+            <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/github/v/release/master-co/style-element?include_prereleases&color=f6f7f8&label=&style=for-the-badge&logo=github&logoColor=%23000">
+            <img alt="NPM Version" src="https://img.shields.io/github/v/release/master-co/style-element?include_prereleases&color=f6f7f8&label=&style=for-the-badge&logo=github">
+        </picture>
+    </a>
+    <a aria-label="NPM Package" href="https://www.npmjs.com/package/@master/style-element.react">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/dm/@master/style-element.react?color=212022&label=%20&logo=npm&style=for-the-badge">
+            <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/npm/dm/@master/style-element.react?color=f6f7f8&label=%20&logo=npm&style=for-the-badge">
+            <img alt="NPM package ( download / month )" src="https://img.shields.io/npm/dm/@master/style-element.react?color=f6f7f8&label=%20&logo=npm&style=for-the-badge">
+        </picture>
+    </a>
+    <a aria-label="Discord Community" href="https://discord.gg/sZNKpAAAw6">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/discord/917780624314613760?color=212022&label=%20&logo=discord&style=for-the-badge">
+            <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/discord/917780624314613760?color=f6f7f8&label=%20&logo=discord&style=for-the-badge">
+            <img alt="Discord online" src="https://img.shields.io/discord/917780624314613760?color=f6f7f8&label=%20&logo=discord&style=for-the-badge">
+        </picture>
+    </a>
+    <a aria-label="Follow @mastercorg" href="https://twitter.com/mastercorg">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/static/v1?label=%20&message=twitter&color=212022&logo=twitter&style=for-the-badge">
+            <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/static/v1?label=%20&message=twitter&color=f6f7f8&logo=twitter&style=for-the-badge">
+            <img alt="Follow @mastercorg" src="https://img.shields.io/static/v1?label=%20&message=twitter&color=f6f7f8&logo=twitter&style=for-the-badge">
+        </picture>
+    </a>
+    <a aria-label="Github Actions" href="https://github.com/1aron/repo/actions/workflows/release.yml">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/github/workflow/status/master-co/style-element/Release?label=%20&message=twitter&color=212022&logo=githubactions&style=for-the-badge">
+            <source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/github/workflow/status/master-co/style-element/Release?label=%20&message=twitter&color=f6f7f8&logo=githubactions&style=for-the-badge&logoColor=%23000">
+            <img alt="Github release actions" src="https://img.shields.io/github/workflow/status/master-co/style-element/Release?label=%20&message=twitter&color=f6f7f8&logo=githubactions&style=for-the-badge&logoColor=%23000">
+        </picture>
+    </a>
 </p>
+
+</div>
 
 <img width="908" alt="Xnapper-2022-08-24-13 09 49" src="https://user-images.githubusercontent.com/33840671/186334385-7bd65ff3-3906-410b-af55-aec7e393e20d.png">
 
 </div>
+
+- Styled elements **driven by class names**.
+- Quickly create **reusable** styled elements.
+- Create styled elements with **less code**.
+- **Extend** existing styled elements.
+- **Conditionally construct class names** and strings with template literals.
 
 </br>
 
@@ -55,42 +92,19 @@ will be rendered as:
 <button class="inline-flex font:14 uppercase">submit</button>
 ```
 
-###### On this page
-
-- [Features](#features)
-- [Install](#install)
-- [Import](#import)
-- [Usage](#usage)
-  - [Create a basic styled element](#create-a-basic-styled-element)
-  - [Apply additional class names](#apply-additional-class-names)
-  - [Apply class names based on properties](#apply-class-names-based-on-properties)
-  - [Transform tag names](#transform-tag-names)
-  - [Extend styled elements](#extend-styled-elements)
-- [Related](#related)
-- [Inspiration](#inspiration)
-
-# Features
-- Styled elements **driven by class names**.
-- Quickly create **reusable** styled elements.
-- Create styled elements with **less code**.
-- **Extend** existing styled elements.
-- **Conditionally construct class names** and strings with template literals.
-
-# Install
+## Installation
 
 ```sh
 npm install @master/style-element.react
 ```
-
-# Import
 ```js
 import el from '@master/style-element.react';
 ```
 
-# Usage
+## Getting Started
 Make it easier and faster to implement functional components using syntactic sugar.
 
-## Create a basic styled element
+### Create a basic styled element
 ```jsx
 import React from 'react'
 import el from '@master/style-element.react'
@@ -108,7 +122,7 @@ rendered as:
 <button class="inline-flex font:14">...</button>
 ```
 
-## Apply additional class names
+### Apply additional class names
 Add `uppercase` for the button here.
 ```jsx
 const Button = el.button`inline-flex font:14`
@@ -122,7 +136,7 @@ rendered as:
 <button class="inline-flex font:14 uppercase">...</button>
 ```
 
-## Apply class names based on properties
+### Apply class names based on properties
 If the custom property name isn't the part of the element, you must prefix it with `$` to prevent it from being reflected to the element's attribute or getting type errors.
 ```jsx
 const Button = el.button`
@@ -144,7 +158,7 @@ rendered as:
 <button class="inline-flex font:14" disabled>...</button>
 ```
 
-## Transform tag names
+### Transform tag names
 If you just want to transform a styled element tag name, leave `` empty.
 ```jsx
 const Button = el.button`inline-flex font:14` // <button>
@@ -162,7 +176,7 @@ rendered as:
 ```
 ⚠️ Extended sources only accept styled elements.
 
-## Extend styled elements
+### Extend styled elements
 ```jsx
 const Button = el.button`inline-flex font:14`
 
@@ -191,10 +205,10 @@ rendered as:
 ```
 ⚠️ Extended sources only accept styled elements.
 
-# Related
-- [@master/css](https://github.com/master-co/css) - A Virtual CSS language with enhanced syntax. ~13KB
+## Related
+- [@master/style-element.react](https://github.com/master-co/style-element) - A Virtual CSS language with enhanced syntax. ~13KB
 - [@master/literal](https://github.com/master-co/literal) - Conditionally construct class names and strings with template literals. ~600B
 
-# Inspiration
+## Inspiration
 Some of our core concepts and designs are inspired by these giants.
 - **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).

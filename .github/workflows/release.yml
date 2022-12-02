@@ -1,0 +1,29 @@
+name: Release
+on:
+    push:
+        branches:
+            - main
+            - beta
+
+jobs:
+    version:
+        timeout-minutes: 15
+        runs-on: ubuntu-20.04
+        strategy:
+            matrix:
+                node-version: [18.12.1]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+                  cache: 'npm'
+            - run: npm i
+
+            - name: Release
+              run: npx semantic-release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
