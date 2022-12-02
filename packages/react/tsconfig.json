@@ -1,24 +1,14 @@
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "jsx": "react",
-        "outDir": "./dist",
-        "baseUrl": "./",
-        "sourceMap": true,
-        "declaration": true,
-        "experimentalDecorators": true,
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "target": "es2015",
-        "module": "es2020",
-        "skipLibCheck": true,
-        "lib": [
-            "es2018",
-            "dom"
-        ]
+        "baseUrl": ".",
+        "outDir": "dist",
+        "allowJs": true,
+        "jsx": "react"
     },
     "include": [
-        "./src/**/*.ts",
-        "./src/**/*.tsx",
-        "./src/**/*.d.ts"
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.d.ts"
     ]
 }

@@ -11,5 +11,6 @@ export default {
                 importHelpers: true
             }
         }
-    }
+    },
+    setupFiles: ['<rootDir>/tests/jest-shim.ts'],
 }
