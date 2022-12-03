@@ -56,7 +56,6 @@
 - [React](https://github.com/master-co/style-element/tree/main/packages/react)
 - Vue 🚧
 - Svelte 🚧
-- SolidJS 🚧
 
 ## Community
 The Master Style Element community can be found here:
