@@ -48,6 +48,9 @@
     "files": [
         "dist"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "dependencies": {
         "@master/literal": "^1.0.11"
     },
