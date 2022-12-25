@@ -52,7 +52,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@master/literal": "^1.0.11"
+        "to-line": "^1.5.0"
     },
     "peerDependencies": {
         "@types/react": ">=15",

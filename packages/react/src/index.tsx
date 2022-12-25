@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import $ from '@master/literal'
+import line from 'to-line'
 
 type baseType = string | number | Record<string, boolean> | { $: string, [key: string]: string } | Record<string, Record<string, string>>;
 type baseLoopType = baseType | Array<baseType>;
@@ -124,7 +124,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
                     }
                 }
 
-                classNames.push($(eachNewTagParam[0], ...newParams))
+                classNames.push(line(eachNewTagParam[0], ...newParams))
             }
 
             for (const conditionalClassesMap of conditionalClassesMaps) {
@@ -151,7 +151,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
             }
 
             // @ts-ignore
-            return <Tag ref={ref} {...newProps} className={$(classNames, props.className)} />
+            return <Tag ref={ref} {...newProps} className={line(classNames, props.className)} />
         }) as any as MasterExoticComponent<K, E>
 
         component.displayName = displayName
