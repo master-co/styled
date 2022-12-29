@@ -105,7 +105,10 @@ test('Alternative syntax', () => {
                 md: 'font:16 py:2 px:4'
             }
         },
-        { intent: 'primary', size: 'md', $: 'uppercase' },
+        {
+            HIHI: false
+        },
+        { intent: 'primary', size: 'md', disabled: false, $: 'uppercase' },
         ({ $intent, $size }) => $intent && $size && 'font:italic'
     )
     expect(renderToStaticMarkup(<Button $intent="primary" $size="md" />))
@@ -120,9 +123,9 @@ test('Alternative syntax', () => {
                 lg: 'font:32 py:5 px:7'
             }
         },
-        { intent: 'primary', size: 'md', $: 'lowercase' }
+        { intent: 'primary', size: 'md', disabled: true, $: 'lowercase' }
     )
 
-    expect(renderToStaticMarkup(<ExtendButton $intent="primary" $size="md" />))
-        .toBe('<button class="font:semibold rounded font:italic bg:blue-70 fg:black bg:blue-80:hover font:16 py:2 px:4"></button>')
+    expect(renderToStaticMarkup(<ExtendButton disabled $intent="primary" $size="md" />))
+        .toBe('<button disabled="" class="font:semibold rounded font:italic lowercase bg:blue-70 fg:black bg:blue-80:hover font:16 py:2 px:4"></button>')
 })

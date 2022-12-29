@@ -1,11 +1,10 @@
 import React, { forwardRef } from 'react'
 import line from 'to-line'
 
-type baseType = string | number | Record<string, boolean> | { $: string, [key: string]: string } | Record<string, Record<string, string>>;
+type baseType = string | number | Record<string, boolean> | { $: string, [key: string]: string | number | boolean } | Record<string, Record<string, string>>;
 type baseLoopType = baseType | Array<baseType>;
 type extraType = { className?: baseLoopType | undefined, [key: string]: any };
 type TagParams = Array<[TemplateStringsArray, any[]]>;
-type ObjectType = Record<string, unknown>;
 
 type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
 type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Omit<K extends IntrinsicElementsKeys
@@ -67,7 +66,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
     const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
         const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]]
         const component = forwardRef<K, MasterComponentProps<K, E>>((props, ref) => {
-            const conditionalClassesMaps: Record<string, string>[] = []
+            const conditionalClassesMaps: Record<string, string | boolean | number>[] = []
             const propClassesMap: Record<string, Record<string, string>> = {}
             const classNames = []
             for (const eachNewTagParam of newTagParams) {
@@ -79,6 +78,27 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
                     } else if (typeof newParam === 'object' && !Array.isArray(newParam)) {
                         const keys = Object.keys(newParam)
                         if (keys.length) {
+                            const handleCombinationsCondition = () => {
+                                newParams[i] = ''
+
+                                let duplicated = false
+                                for (const conditionalClassesMap of conditionalClassesMaps) {
+                                    const entries = Object.entries(conditionalClassesMap)
+                                    if (
+                                        entries.length === keys.length
+                                        && entries.every(([key, value]) => keys.includes(key) && (key === '$' || newParam[key] === value))
+                                    ) {
+                                        duplicated = true
+                                        conditionalClassesMap['$'] = entries['$']
+                                        break
+                                    }
+                                }
+
+                                if (!duplicated) {
+                                    conditionalClassesMaps.push(newParam)
+                                }
+                            }
+
                             switch (typeof newParam[keys[0]]) {
                                 case 'object':
                                     newParams[i] = ''
@@ -96,26 +116,13 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
                                     }
                                     break
                                 case 'string':
-                                    newParams[i] = ''
-
-                                    // eslint-disable-next-line no-case-declarations
-                                    let duplicated = false
-                                    for (const conditionalClassesMap of conditionalClassesMaps) {
-                                        const entries = Object.entries(conditionalClassesMap)
-                                        if (
-                                            entries.length === keys.length
-                                            && entries.every(([key, value]) => keys.includes(key) && (key === '$' || newParam[key] === value))
-                                        ) {
-                                            duplicated = true
-                                            conditionalClassesMap['$'] = entries['$']
-                                            break
-                                        }
+                                case 'number':
+                                    handleCombinationsCondition()
+                                    break
+                                case 'boolean':
+                                    if (keys.includes('$')) {
+                                        handleCombinationsCondition()
                                     }
-
-                                    if (!duplicated) {
-                                        conditionalClassesMaps.push(newParam)
-                                    }
-
                                     break
                             }
                         } else {
@@ -128,7 +135,16 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
             }
 
             for (const conditionalClassesMap of conditionalClassesMaps) {
-                if (Object.entries(conditionalClassesMap).every(([name, value]) => name === '$' || value === (props[name] ?? props['$' + name]))) {
+                if (
+                    Object.entries(conditionalClassesMap).every(([name, value]) => {
+                        if (name === '$')
+                            return true
+
+                        const propValue = props[name] ?? props['$' + name]
+                        if (value === propValue || value === false && propValue === undefined)
+                            return true
+                    })
+                ) {
                     classNames.push(conditionalClassesMap['$'])
                 }
             }
