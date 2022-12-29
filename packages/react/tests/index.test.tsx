@@ -65,7 +65,7 @@ test('Prop composition', () => {
         ${{ intent: 'primary', size: 'md', $: 'lowercase' }}
     `
     expect(renderToStaticMarkup(<ExtendButton $intent="primary" $size="md" />))
-        .toBe('<button class="font:semibold rounded font:italic bg:blue-70 fg:black bg:blue-80:hover font:16 py:2 px:4"></button>')
+        .toBe('<button class="font:semibold rounded font:italic lowercase bg:blue-70 fg:black bg:blue-80:hover font:16 py:2 px:4"></button>')
 
     expect(renderToStaticMarkup(<ExtendButton intent="secondary" />))
         .toBe('<button intent="secondary" class="font:semibold rounded bg:white fg:gray-80 b:gray-40 bg:gray-50:hover"></button>')
@@ -108,11 +108,18 @@ test('Alternative syntax', () => {
         {
             HIHI: false
         },
+        ({ disabled }) => ({ 
+            intent: disabled ? 'secondary' : 'third',
+            size: 'lg',
+            $: 'b:2|solid|red'
+        }),
         { intent: 'primary', size: 'md', disabled: false, $: 'uppercase' },
         ({ $intent, $size }) => $intent && $size && 'font:italic'
     )
     expect(renderToStaticMarkup(<Button $intent="primary" $size="md" />))
         .toBe('<button class="font:semibold rounded font:italic uppercase bg:blue-50 fg:white bg:blue-60:hover font:16 py:2 px:4"></button>')
+    expect(renderToStaticMarkup(<Button disabled $intent="secondary" $size="lg" />))
+        .toBe('<button disabled="" class="font:semibold rounded font:italic b:2|solid|red bg:white fg:gray-80 b:gray-40 bg:gray-50:hover"></button>')
 
     const ExtendButton = style(Button)(
         {
@@ -123,9 +130,16 @@ test('Alternative syntax', () => {
                 lg: 'font:32 py:5 px:7'
             }
         },
+        ({ disabled }) => ({ 
+            intent: disabled ? 'secondary' : 'third',
+            size: 'lg',
+            $: 'b:2|solid|blue'
+        }),
         { intent: 'primary', size: 'md', disabled: true, $: 'lowercase' }
     )
 
     expect(renderToStaticMarkup(<ExtendButton disabled $intent="primary" $size="md" />))
         .toBe('<button disabled="" class="font:semibold rounded font:italic lowercase bg:blue-70 fg:black bg:blue-80:hover font:16 py:2 px:4"></button>')
+    expect(renderToStaticMarkup(<ExtendButton $intent="third" $size="lg" />))
+        .toBe('<button class="font:semibold rounded font:italic b:2|solid|blue font:32 py:5 px:7"></button>')
 })

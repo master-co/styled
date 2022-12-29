@@ -72,10 +72,11 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
             for (const eachNewTagParam of newTagParams) {
                 const newParams = [...eachNewTagParam[1]]
                 for (let i = 0; i < newParams.length; i++) {
-                    const newParam = newParams[i]
+                    let newParam = newParams[i]
                     if (typeof newParam === 'function') {
-                        newParams[i] = newParam(props) || ''
-                    } else if (typeof newParam === 'object' && !Array.isArray(newParam)) {
+                        newParam = newParams[i] = newParam(props) || ''
+                    }
+                    if (typeof newParam === 'object' && !Array.isArray(newParam)) {
                         const keys = Object.keys(newParam)
                         if (keys.length) {
                             const handleCombinationsCondition = () => {
@@ -89,7 +90,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
                                         && entries.every(([key, value]) => keys.includes(key) && (key === '$' || newParam[key] === value))
                                     ) {
                                         duplicated = true
-                                        conditionalClassesMap['$'] = entries['$']
+                                        conditionalClassesMap['$'] = newParam['$']
                                         break
                                     }
                                 }
