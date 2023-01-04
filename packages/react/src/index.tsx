@@ -17,6 +17,7 @@ type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<
 type MasterExoticComponent<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = React.ForwardRefExoticComponent<MasterComponentProps<K, E> & React.RefAttributes<K>> & { tag: K, params: TagParams };
 
 type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Array<((props: MasterComponentProps<K, E>) => baseLoopType | undefined) | baseLoopType>;
+
 type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = <F extends TemplateStringsArray | MasterExoticComponent<any> | baseType>(
     firstParam: F,
     ...params: F extends MasterExoticComponent<any, any>
@@ -27,25 +28,15 @@ type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
     : MasterExoticComponent<K, E>)
 
 const style: {
-    [key in IntrinsicElementsKeys]: <F extends TemplateStringsArray | MasterExoticComponent<any, any> | baseType, E extends object = object>(
-        firstParam: F,
-        ...params: F extends MasterExoticComponent<any, any>
-            ? never
-            : ParamsType<key, E>
-    ) => (F extends MasterExoticComponent<any, any>
-        ? ReturnType<key, E>
-        : MasterExoticComponent<key, E>)
+    [key in IntrinsicElementsKeys]: (<F extends MasterExoticComponent<any, any>, E extends object = object>(firstParam: F) => F extends MasterExoticComponent<any, infer ME> ? ReturnType<key, ME & E> : never)
+        & (<E extends object = object>(firstParam: TemplateStringsArray | baseType, ...params: ParamsType<key, E>) => MasterExoticComponent<key, E>)
 } & {
-    <F extends TemplateStringsArray | MasterExoticComponent<any> | React.ComponentType<any> | baseType, E extends object = object>(
-        firstParam: F,
-        ...params: F extends MasterExoticComponent<any, any>
-            ? never
-            : ParamsType<'div', E>
-    ): (F extends MasterExoticComponent<infer K, infer E>
-        ? ReturnType<K, E>
-        : F extends React.ComponentType<any>
-        ? ReturnType<F>
-        : MasterExoticComponent<'div', E>)
+    <F extends MasterExoticComponent<any>, E extends object = object>(firstParam: F): F extends MasterExoticComponent<infer K, infer ME> ? ReturnType<K, ME & E> : never
+} & {
+    <E extends object = object>(firstParam: TemplateStringsArray | baseType, ...params: ParamsType<'div', E>): MasterExoticComponent<'div', E>
+} & {
+    //@ts-ignore
+    <F extends React.ComponentType<any>, E extends object = object>(firstParam: F, ...params: F extends React.ComponentType<infer RE> ? ParamsType<'div', RE & E> : never): F extends React.ComponentType<infer RE> ? ReturnType<React.ComponentType<RE & E>> :never
 } = new Proxy(
     ((firstParam, ...params) => {
         return (Array.isArray(firstParam) && 'raw' in firstParam || typeof firstParam !== 'object' || !('render' in firstParam))
