@@ -142,12 +142,10 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
             }
 
             for (const name in propClassesMap) {
-                const value = props[name] || props['$' + name]
-                if (value) {
-                    const classes = propClassesMap[name][value]
-                    if (classes) {
-                        classNames.push(classes)
-                    }
+                const value = props[name] ?? props['$' + name] ?? ''
+                const classes = propClassesMap[name][value]
+                if (classes) {
+                    classNames.push(classes)
                 }
             }
 

@@ -97,6 +97,7 @@ test('Alternative syntax', () => {
         'font:semibold rounded',
         {
             intent: {
+                '': 'bg:purple-50 fg:black bg:purple-60:hover',
                 primary: 'bg:blue-50 fg:white bg:blue-60:hover',
                 secondary: 'bg:white fg:gray-80 b:gray-40 bg:gray-50:hover',
             },
@@ -116,6 +117,8 @@ test('Alternative syntax', () => {
         { intent: 'primary', size: 'md', disabled: false, $: 'uppercase' },
         ({ $intent, $size }) => $intent && $size && 'font:italic'
     )
+    expect(renderToStaticMarkup(<Button $size="md" />))
+        .toBe('<button class="font:semibold rounded bg:purple-50 fg:black bg:purple-60:hover font:16 py:2 px:4"></button>')
     expect(renderToStaticMarkup(<Button $intent="primary" $size="md" />))
         .toBe('<button class="font:semibold rounded font:italic uppercase bg:blue-50 fg:white bg:blue-60:hover font:16 py:2 px:4"></button>')
     expect(renderToStaticMarkup(<Button disabled $intent="secondary" $size="lg" />))
