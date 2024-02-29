@@ -66,7 +66,7 @@
         "clsx": "^2.1.0"
     },
     "devDependencies": {
-        "@playwright/experimental-ct-vue": "^1.41.2",
+        "@playwright/experimental-ct-vue": "1.41.2",
         "@playwright/test": "^1.41.2",
         "@types/node": "^20.11.24",
         "@vitejs/plugin-vue": "^4.6.2",
