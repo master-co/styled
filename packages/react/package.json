@@ -69,6 +69,7 @@
     },
     "devDependencies": {
         "@playwright/experimental-ct-react": "^1.41.2",
-        "@playwright/test": "^1.42.0"
+        "@playwright/test": "^1.42.0",
+        "eslint-plugin-react-hooks": "^4.6.0"
     }
 }
