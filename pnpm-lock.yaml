@@ -41,11 +41,11 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@playwright/experimental-ct-react':
-        specifier: ^1.41.2
+        specifier: ^1.42.0
         version: 1.42.0(@types/node@20.11.24)(vite@5.1.4)
       '@playwright/test':
-        specifier: ^1.41.2
-        version: 1.41.2
+        specifier: ^1.42.0
+        version: 1.42.0
       eslint-plugin-react-hooks:
         specifier: ^4.6.0
         version: 4.6.0(eslint@8.57.0)
@@ -1440,6 +1440,14 @@ packages:
     hasBin: true
     dependencies:
       playwright: 1.41.2
+    dev: true
+
+  /@playwright/test@1.42.0:
+    resolution: {integrity: sha512-2k1HzC28Fs+HiwbJOQDUwrWMttqSLUVdjCqitBOjdCD0svWOMQUVqrXX6iFD7POps6xXAojsX/dGBpKnjZctLA==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      playwright: 1.42.0
     dev: true
 
   /@rollup/plugin-commonjs@25.0.7(rollup@4.12.0):
