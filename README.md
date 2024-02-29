@@ -91,7 +91,7 @@ It will be rendered as:
 ```
 
 ## Getting Started
-Install the package `class-variant`, `@master/styled.react`, or `@master/styled.vue` depending on your framework:
+Install the package `npm i class-variant`, `npm i @master/styled.react`, or `npm i @master/styled.vue` depending on your framework:
 
 ### Vanilla JS
 ```js
@@ -133,25 +133,27 @@ return (
 Predefine the class variant corresponding to the property.
 ```tsx
 const Button = styled.button('flex', {
-    size: {
+    $size: {
         sm: 'font:12 size:8x',
         md: 'font:14 size:12x'
     },
-    disabled: 'opacity:.5',
+    $disabled: 'opacity:.5',
     ...
 })
 
 return (
-    <Button size="sm" disabled />
+    <Button $size="sm" disabled />
 )
 ```
 ```html
 <button class="flex font:12 size:8x opacity:.5" disabled></button>
 ```
+> ⚠️ Custom properties that are not element-owned properties must be prefixed with `$prop`, otherwise they will be reflected on the final element and an error may be thrown.
+
 You can set default properties for elements.
 ```tsx
 Button.defaultProps = {
-    size: 'md'
+    $size: 'md'
 }
 
 return (
@@ -166,11 +168,11 @@ return (
 Dynamically apply class names based on function properties.
 ```tsx
 const Element = styled.div('fg:white',
-    ({ color }) => color && `bg:${color}`
+    ({ $color }) => $color && `bg:${$color}`
 )
 
 return (
-    <Element color="blue" />
+    <Element $color="blue" />
 )
 ```
 ```html
@@ -181,13 +183,13 @@ return (
 Applies the target class name matching all specified property keys and their values.
 ```tsx
 const Button = styled.button('inline-flex',
-    ['uppercase', { intent: 'primary', size: 'md' }]
+    ['uppercase', { $intent: 'primary', $size: 'md' }]
 )
 
 return (
-    <Button intent="primary">Not matched</button>
-    <Button size="md">Not matched</button>
-    <Button intent="primary" size="md">Matched</button>
+    <Button $intent="primary">Not matched</button>
+    <Button $size="md">Not matched</button>
+    <Button $intent="primary" $size="md">Matched</button>
 )
 ```
 ```html
