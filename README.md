@@ -313,3 +313,7 @@ The Master community can be found here:
 
 ## Contributing
 Please see our [CONTRIBUTING](https://github.com/master-co/styled/blob/main/.github/CONTRIBUTING.md) for workflow.
+
+## Inspiration
+Some of our core concepts and designs are inspired by these giants.
+- **Template Literal** - The use of template literals as syntactic sugar for reusing components is inspired by [Styled Components](https://styled-components.com/).
