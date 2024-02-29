@@ -2,35 +2,41 @@ name: Release
 on:
     push:
         branches:
-            - main
+            - alpha
             - beta
+            - rc
+            - main
+            - canary
 
 jobs:
-    version:
-        timeout-minutes: 15
-        runs-on: ubuntu-20.04
-        strategy:
-            matrix:
-                node-version: [18.12.1]
+    release:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            issues: write
+            pull-requests: write
+            id-token: write
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v3
               with:
-                  node-version: ${{ matrix.node-version }}
-                  registry-url: 'https://registry.npmjs.org'
-                  cache: 'npm'
-            - run: npm ci
-            - run: npm run build
-
-            - uses: lewagon/wait-on-check-action@v1.2.0
+                  version: 8
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "pnpm"
+            - run: pnpm install
+            - run: pnpm install semantic-release-config-techor --workspace-root
+            - run: pnpm build
+            - uses: lewagon/wait-on-check-action@v1.3.3
               with:
                   ref: ${{ github.ref }}
-                  check-regexp: test.*|check.*|commit-check.*|lint.*
+                  running-workflow-name: wait-for-check-regexp
+                  # todo: example-check
+                  check-regexp: lint|test|commit-check|type-check|e2e
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   wait-interval: 10
-
-            - run: npx --no -- semantic-release
+            - run: pnpm exec semantic-release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                  VSCE_PAT: ${{ secrets.VSCE_PAT }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

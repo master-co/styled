@@ -1,0 +1,53 @@
+{
+    "name": "class-variant",
+    "type": "module",
+    "scripts": {
+        "build": "techor build",
+        "dev": "pnpm build --watch",
+        "lint": "eslint src",
+        "test": "jest",
+        "check:type": "tsc --noEmit"
+    },
+    "license": "MIT",
+    "description": "Create reusable and extensible style class variants",
+    "author": "Aoyue Design LLC.",
+    "funding": "https://css.master.co/docs/donate",
+    "homepage": "https://github.com/master-co/styled",
+    "bugs": {
+        "url": "https://github.com/master-co/styled/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/master-co/styled.git",
+        "directory": "packages/core"
+    },
+    "keywords": [
+        "variant",
+        "classname",
+        "css",
+        "mastercss"
+    ],
+    "sideEffects": false,
+    "main": "./dist/index.cjs",
+    "jsnext:main": "./dist/index.mjs",
+    "esnext": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "dependencies": {
+        "clsx": "^2.1.0"
+    }
+}

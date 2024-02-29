@@ -1,29 +1,28 @@
 {
+    "private": true,
+    "type": "module",
     "scripts": {
-        "build": "turbo run build --filter=./packages/*",
-        "build:clean": "rm -rf ./packages/**/*dist && turbo run build --force --no-cache --filter=./packages/*",
-        "check": "turbo run test lint type-check --parallel --filter=./packages/*",
-        "test": "turbo run test --parallel --filter=./packages/*",
-        "lint": "turbo run lint --parallel --filter=./packages/*",
-        "type-check": "turbo run type-check --parallel --filter=./packages/*",
-        "commit-check": "commitlint --from=HEAD~1 --verbose",
-        "dev": "turbo run dev --filter=./packages/*",
-        "clean": "rm -rf ./packages/**/*dist"
+        "postinstall": "pnpm dlx husky install",
+        "build": "pnpm --filter \"./packages/*\" build",
+        "dev": "pnpm --filter \"./packages/*\" dev",
+        "test": "pnpm --filter \"./packages/*\" --parallel test",
+        "e2e": "pnpm --filter \"./packages/*\" --parallel e2e",
+        "lint": "pnpm --filter \"./packages/*\" --parallel lint",
+        "check:type": "pnpm --filter \"./packages/*\" --parallel type-check",
+        "check:commit": "commitlint --from=HEAD~1 --verbose"
+    },
+    "packageManager": "^pnpm@8.15.3",
+    "engines": {
+        "node": "^20"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/master-co/style-element.git"
+        "url": "https://github.com/master-co/styled.git"
     },
-    "workspaces": [
-        "packages/*",
-        "examples/*"
-    ],
+    "dependencies": {
+        "@techor/repo": "^3.0.17"
+    },
     "devDependencies": {
-        "aron-web-jest": "^1.0.0",
-        "aronrepo": "^1.0.0",
-        "util": "^0.12.5"
-    },
-    "engines": {
-        "node": "^18.12.1"
+        "class-variant": "workspace:^"
     }
 }

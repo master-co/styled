@@ -1,36 +1,42 @@
 {
-    "name": "@master/style-element.react",
+    "name": "@master/styled.react",
+    "type": "module",
     "scripts": {
-        "build": "aron pack",
-        "dev": "npm run build -- --watch",
-        "test": "jest",
-        "type-check": "tsc --noEmit",
-        "lint": "eslint src"
+        "build": "techor build \"src/**/*.tsx\"",
+        "dev": "pnpm build --watch",
+        "lint": "eslint src",
+        "e2e": "playwright test -c e2e/playwright-ct.config.ts",
+        "check:type": "tsc --noEmit"
     },
     "license": "MIT",
-    "description": "Quickly create reusable React elements driven by class names ~800B",
+    "description": "Create reusable and extensible styled React elements in one line",
     "author": "Aoyue Design LLC.",
-    "funding": "https://docs.master.co/css/donate",
-    "homepage": "https://css.master.co",
+    "funding": "https://css.master.co/docs/donate",
+    "homepage": "https://github.com/master-co/styled",
     "bugs": {
-        "url": "https://github.com/master-co/style-element/issues"
+        "url": "https://github.com/master-co/styled/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/master-co/style-element.git",
+        "url": "https://github.com/master-co/styled.git",
         "directory": "packages/react"
     },
     "keywords": [
         "styled",
         "component",
         "element",
-        "css",
-        "react",
         "styled-component",
+        "react",
+        "hooks",
+        "use",
+        "css",
+        "mastercss",
         "class-name",
         "reactjs",
         "nextjs",
-        "solidjs"
+        "solidjs",
+        "server-component",
+        "client-component"
     ],
     "sideEffects": false,
     "main": "./dist/index.cjs",
@@ -49,13 +55,20 @@
         "dist"
     ],
     "publishConfig": {
-        "access": "public"
-    },
-    "dependencies": {
-        "to-line": "^1.5.0"
+        "access": "public",
+        "provenance": true
     },
     "peerDependencies": {
         "@types/react": ">=15",
-        "react": ">=16.0.0"
+        "react": ">=16.8.0",
+        "react-dom": ">=16.8.0"
+    },
+    "dependencies": {
+        "class-variant": "workspace:^",
+        "clsx": "^2.1.0"
+    },
+    "devDependencies": {
+        "@playwright/experimental-ct-react": "^1.41.2",
+        "@playwright/test": "^1.42.0"
     }
 }

@@ -1,24 +1,30 @@
 import React, { forwardRef } from 'react'
-import line from 'to-line'
+import cv from 'class-variant'
+import clsx from 'clsx'
 
-type baseType = string | number | Record<string, boolean> | { $: string, [key: string]: string | number | boolean } | Record<string, Record<string, string>>;
-type baseLoopType = baseType | Array<baseType>;
-type extraType = { className?: baseLoopType | undefined, [key: string]: any };
+type baseType<E> = string
+    | string[]
+    | Record<string, boolean>
+    | [string, { [key in keyof E]?: E[key] }]
+    | { [key in keyof E]?: E[key] extends boolean | undefined ? string : Record<string, string> }
+type baseLoopType<E> = baseType<E> | Array<baseType<E>>;
+type extraType<E> = { className?: baseLoopType<E> | undefined, [key: string]: any };
 type TagParams = Array<[TemplateStringsArray, any[]]>;
 
 type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
-type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Omit<K extends IntrinsicElementsKeys
+type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = extraType<E> & (Omit<(K extends IntrinsicElementsKeys
     ? JSX.IntrinsicElements[K] extends React.DetailedHTMLProps<infer Attributes, infer Element>
-        ? Attributes & Partial<E>
-        : never
+    ? Attributes
+    : never
     : K extends React.ComponentType<infer U>
-        ? U & Partial<E>
-        : never, 'className' | 'ref'> & extraType;
+    ? U
+    : never) & Partial<E>, 'className' | 'ref'>);
 type MasterExoticComponent<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = React.ForwardRefExoticComponent<MasterComponentProps<K, E> & React.RefAttributes<K>> & { tag: K, params: TagParams };
 
-type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Array<((props: MasterComponentProps<K, E>) => baseLoopType | undefined) | baseLoopType>;
+type ParamType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = ((props: MasterComponentProps<K, E>) => baseLoopType<MasterComponentProps<K, E>> | undefined) | baseLoopType<MasterComponentProps<K, E>>
+type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Array<ParamType<K, E>>;
 
-type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = <F extends TemplateStringsArray | MasterExoticComponent<any> | baseType>(
+type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = <F extends TemplateStringsArray | MasterExoticComponent<any> | baseType<E>>(
     firstParam: F,
     ...params: F extends MasterExoticComponent<any, any>
         ? never
@@ -27,21 +33,21 @@ type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
     ? ReturnType<K, E>
     : MasterExoticComponent<K, E>)
 
-const style: {
-    [key in IntrinsicElementsKeys]: (<F extends MasterExoticComponent<any, any>, E extends object = object>(firstParam: F) => F extends MasterExoticComponent<any, infer ME> ? ReturnType<key, ME & E> : never)
-        & (<E extends object = object>(firstParam: TemplateStringsArray | baseType, ...params: ParamsType<key, E>) => MasterExoticComponent<key, E>)
+const styled: {
+    [key in IntrinsicElementsKeys]: (<E extends object = object>(firstParam: TemplateStringsArray | ParamType<key, E>, ...params: ParamsType<key, E>) => MasterExoticComponent<key, E>)
+    & (<F extends MasterExoticComponent<any, any>, E extends object = object>(firstParam: F) => F extends MasterExoticComponent<any, infer ME> ? ReturnType<key, ME & E> : never)
 } & {
     <F extends MasterExoticComponent<any>, E extends object = object>(firstParam: F): F extends MasterExoticComponent<infer K, infer ME> ? ReturnType<K, ME & E> : never
 } & {
-    <E extends object = object>(firstParam: TemplateStringsArray | baseType, ...params: ParamsType<'div', E>): MasterExoticComponent<'div', E>
+    <E extends object = object>(firstParam: TemplateStringsArray | ParamType<'div', E>, ...params: ParamsType<'div', E>): MasterExoticComponent<'div', E>
 } & {
     //@ts-ignore
-    <F extends React.ComponentType<any>, E extends object = object>(firstParam: F, ...params: F extends React.ComponentType<infer RE> ? ParamsType<'div', RE & E> : never): F extends React.ComponentType<infer RE> ? ReturnType<React.ComponentType<RE & E>> :never
+    <F extends React.ComponentType<any>, E extends object = object>(firstParam: F, ...params: F extends React.ComponentType<infer RE> ? ParamsType<'div', RE & E> : never): F extends React.ComponentType<infer RE> ? ReturnType<React.ComponentType<RE & E>> : never
 } = new Proxy(
-    ((firstParam, ...params) => {
+    ((firstParam: any, ...params: any[]) => {
         return (Array.isArray(firstParam) && 'raw' in firstParam || typeof firstParam !== 'object' || !('render' in firstParam))
-            ? style.div(firstParam as any, ...params)
-            : handle(firstParam.tag ?? firstParam, firstParam.params, firstParam.displayName)
+            ? styled.div(firstParam as any, ...params)
+            : handle(firstParam.tag ?? firstParam, firstParam.params, firstParam.displayName, firstParam.defaultProps)
     }) as any,
     {
         get: function (target, Tag: IntrinsicElementsKeys) {
@@ -53,122 +59,122 @@ const style: {
     }
 )
 
-function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object>(Tag: K, tagParams: TagParams, displayName: string) {
-    const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
-        const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]]
-        const component = forwardRef<K, MasterComponentProps<K, E>>((props, ref) => {
-            const conditionalClassesMaps: Record<string, string | boolean | number>[] = []
-            const propClassesMap: Record<string, Record<string, string>> = {}
-            const classNames = []
-            for (const eachNewTagParam of newTagParams) {
-                const newParams = [...eachNewTagParam[1]]
-                for (let i = 0; i < newParams.length; i++) {
-                    let newParam = newParams[i]
-                    if (typeof newParam === 'function') {
-                        newParam = newParams[i] = newParam(props) || ''
-                    }
-                    if (typeof newParam === 'object' && !Array.isArray(newParam)) {
-                        const keys = Object.keys(newParam)
-                        if (keys.length) {
-                            const handleCombinationsCondition = () => {
-                                newParams[i] = ''
-
-                                let duplicated = false
-                                for (const conditionalClassesMap of conditionalClassesMaps) {
-                                    const entries = Object.entries(conditionalClassesMap)
-                                    if (
-                                        entries.length === keys.length
-                                        && entries.every(([key, value]) => keys.includes(key) && (key === '$' || newParam[key] === value))
-                                    ) {
-                                        duplicated = true
-                                        conditionalClassesMap['$'] = newParam['$']
-                                        break
+function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object>(Tag: K, tagParams: TagParams = [], displayName: string, defaultProps?: Partial<E>) {
+    return (...params: any[]): any => {
+        const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
+            const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]]
+            const component = forwardRef<K, MasterComponentProps<K, E>>((props, ref) => {
+                const classNames: string[] = []
+                const classesConditions: [string, Record<string, string | number | boolean>][] = []
+                let valuesByProp: Record<string, string | Record<string, string>>
+                const unhandledTagParams: TagParams = []
+                const handleParam = (param: any) => {
+                    switch (typeof param) {
+                        case 'object':
+                            if (Array.isArray(param)) {
+                                const newClassesByCondition = param[1]
+                                if (newClassesByCondition && typeof newClassesByCondition === 'object') {
+                                    const keys = Object.keys(newClassesByCondition)
+                                    for (const eachClassesByCondition of classesConditions) {
+                                        const entries = Object.entries(eachClassesByCondition[1])
+                                        if (
+                                            entries.length === keys.length
+                                            && entries.every(([key, value]) => keys.includes(key) && newClassesByCondition[key] === value)
+                                        )
+                                            return true
                                     }
+                                    classesConditions.push(param as any)
                                 }
-
-                                if (!duplicated) {
-                                    conditionalClassesMaps.push(newParam)
-                                }
-                            }
-
-                            switch (typeof newParam[keys[0]]) {
-                                case 'object':
-                                    newParams[i] = ''
-
-                                    for (const name of keys) {
-                                        if (name in propClassesMap) {
-                                            const classesMap = propClassesMap[name]
-                                            const newClassesMap = newParam[name]
-                                            for (const value in newClassesMap) {
-                                                classesMap[value] = newClassesMap[value]
+                            } else {
+                                const keys = Object.keys(param)
+                                if (keys.length) {
+                                    switch (typeof param[keys[0]]) {
+                                        case 'object':
+                                        case 'string':
+                                            if (valuesByProp) {
+                                                for (const eachProp of keys) {
+                                                    const value = param[eachProp]
+                                                    switch (typeof value) {
+                                                        case 'object':
+                                                            if (eachProp in valuesByProp) {
+                                                                const classesByPropValue = valuesByProp[eachProp] as Record<string, string>
+                                                                for (const eachPropValue in value) {
+                                                                    if (!(eachPropValue in classesByPropValue)) {
+                                                                        classesByPropValue[eachPropValue] = value[eachPropValue] as string
+                                                                    }
+                                                                }
+                                                            } else {
+                                                                valuesByProp[eachProp] = value
+                                                            }
+                                                            break
+                                                        case 'string':
+                                                            if (!(eachProp in valuesByProp)) {
+                                                                valuesByProp[eachProp] = value
+                                                            }
+                                                            break
+                                                    }
+                                                }
+                                                return true
+                                            } else {
+                                                valuesByProp = param
                                             }
-                                        } else {
-                                            propClassesMap[name] = newParam[name]
-                                        }
+                                            break
+                                        case 'boolean':
+                                            for (const eachProp of keys) {
+                                                if (param[eachProp]) {
+                                                    classNames.push(eachProp)
+                                                }
+                                            }
+                                            return true
                                     }
-                                    break
-                                case 'string':
-                                case 'number':
-                                    handleCombinationsCondition()
-                                    break
-                                case 'boolean':
-                                    if (keys.includes('$')) {
-                                        handleCombinationsCondition()
-                                    }
-                                    break
+                                }
                             }
-                        } else {
-                            newParams[i] = ''
+                            break
+                        case 'function':
+                            // eslint-disable-next-line no-case-declarations
+                            const transformedParam = param(props)
+                            if (typeof transformedParam === 'object' && handleParam(transformedParam))
+                                return true
+                            break
+                    }
+                }
+
+                for (let i = newTagParams.length - 1; i >= 0; i--) {
+                    const eachNewTagParam = newTagParams[i]
+                    const newParams = [...eachNewTagParam[1]]
+                    for (let j = 0; j < newParams.length; j++) {
+                        if (handleParam(newParams[j])) {
+                            newParams[j] = ''
                         }
                     }
+                    unhandledTagParams.push([eachNewTagParam[0], newParams])
                 }
 
-                classNames.push(line(eachNewTagParam[0], ...newParams))
-            }
-
-            for (const conditionalClassesMap of conditionalClassesMaps) {
-                if (
-                    Object.entries(conditionalClassesMap).every(([name, value]) => {
-                        if (name === '$')
-                            return true
-
-                        const propValue = props[name] ?? props['$' + name]
-                        if (value === propValue || value === false && propValue === undefined)
-                            return true
-                    })
-                ) {
-                    classNames.push(conditionalClassesMap['$'])
+                for (let i = unhandledTagParams.length - 1; i >= 0; i--) {
+                    const eachHandledTagParam = unhandledTagParams[i]
+                    classNames.push(cv(eachHandledTagParam[0], ...eachHandledTagParam[1])(props))
                 }
-            }
 
-            for (const name in propClassesMap) {
-                const value = props[name] ?? props['$' + name] ?? ''
-                const classes = propClassesMap[name][value]
-                if (classes) {
-                    classNames.push(classes)
+                const newProps: Record<string, any> = {}
+                for (const key in props) {
+                    if (!key.startsWith('$')) {
+                        newProps[key] = props[key]
+                    }
                 }
-            }
 
-            const newProps: Record<string, any> = {}
-            for (const key in props) {
-                if (!key.startsWith('$')) {
-                    newProps[key] = props[key]
-                }
-            }
+                // @ts-ignore
+                return <Tag ref={ref} {...newProps} className={clsx(classNames, props.className)} />
+            }) as any as MasterExoticComponent<K, E>
 
-            // @ts-ignore
-            return <Tag ref={ref} {...newProps} className={line(classNames, props.className)} />
-        }) as any as MasterExoticComponent<K, E>
+            component.displayName = displayName
+            component.tag = Tag
+            component.params = newTagParams
+            component.defaultProps = defaultProps as any
+            return component
+        }
 
-        component.displayName = displayName
-        component.tag = Tag
-        component.params = newTagParams
-        return component
-    }
-
-    return (...params: any[]) => {
         const firstParam = params[0]
-        let newTagParams = tagParams || []
+        let newTagParams = tagParams
         if (firstParam.params) {
             newTagParams = [...newTagParams, ...firstParam.params]
         }
@@ -176,10 +182,10 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
         if (Array.isArray(firstParam) && 'raw' in firstParam) {
             return generateFunctionComponent(firstParam as TemplateStringsArray, ...params.slice(1))
         } else if (typeof firstParam === 'object' && 'render' in firstParam) {
-            return handle(Tag, newTagParams, firstParam.displayName)
+            return handle(Tag, newTagParams, firstParam.displayName, firstParam.defaultProps)
         } else {
-            const templateStringsArray = []
-            const newParams = []
+            const templateStringsArray: any[] = []
+            const newParams: any[] = []
             for (const eachParam of params) {
                 (typeof eachParam === 'string' ? templateStringsArray : newParams).push(eachParam)
             }
@@ -189,4 +195,4 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
     }
 }
 
-export default style
+export default styled

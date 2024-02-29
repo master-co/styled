@@ -1,13 +1,15 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "baseUrl": ".",
-        "outDir": "dist",
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ]
     },
     "include": [
-        "src/**/*.ts",
         "src/**/*.tsx",
-        "src/**/*.d.ts"
+        "e2e/**/*.tsx"
     ]
 }

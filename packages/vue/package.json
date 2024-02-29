@@ -1,0 +1,79 @@
+{
+    "name": "@master/styled.vue",
+    "type": "module",
+    "scripts": {
+        "build:main": "vite build",
+        "build:type": "vue-tsc --declaration --emitDeclarationOnly",
+        "build": "pnpm run \"/^build:/\"",
+        "dev": "pnpm run build:main --watch",
+        "lint": "eslint src",
+        "e2e": "playwright test -c e2e/playwright-ct.config.ts",
+        "check:type": "vue-tsc --noEmit"
+    },
+    "license": "MIT",
+    "description": "Create reusable and extensible styled Vue elements in one line",
+    "author": "Aoyue Design LLC.",
+    "funding": "https://css.master.co/docs/donate",
+    "homepage": "https://github.com/master-co/styled",
+    "bugs": {
+        "url": "https://github.com/master-co/styled/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/master-co/styled.git",
+        "directory": "packages/vue"
+    },
+    "keywords": [
+        "styled",
+        "component",
+        "element",
+        "styled-component",
+        "vue",
+        "hooks",
+        "use",
+        "css",
+        "mastercss",
+        "class-name",
+        "vuejs",
+        "nuxtjs"
+    ],
+    "sideEffects": false,
+    "main": "./dist/index.cjs",
+    "jsnext:main": "./dist/index.js",
+    "esnext": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "peerDependencies": {
+        "vue": ">=3.0.0"
+    },
+    "dependencies": {
+        "@techor/extend": "^3.0.16",
+        "class-variant": "workspace:^",
+        "clsx": "^2.1.0"
+    },
+    "devDependencies": {
+        "@playwright/experimental-ct-vue": "^1.41.2",
+        "@playwright/test": "^1.42.0",
+        "@vitejs/plugin-vue": "^4.6.2",
+        "@vue/server-renderer": "^3.4.19",
+        "@vue/test-utils": "^2.4.4",
+        "@vue/tsconfig": "^0.4.0",
+        "typescript": "^5.3.3",
+        "vite": "^5.1.4",
+        "vue-tsc": "^1.8.27"
+    }
+}

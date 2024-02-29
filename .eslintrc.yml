@@ -1,1 +1,3 @@
-extends: aron
+root: true
+extends:
+    - techor
