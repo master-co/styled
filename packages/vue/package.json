@@ -7,7 +7,7 @@
         "build": "pnpm run \"/^build:/\"",
         "dev": "pnpm run build:main --watch",
         "lint": "eslint src",
-        "e2e": "playwright install && playwright test -c e2e/playwright-ct.config.ts",
+        "e2e": "playwright test -c e2e/playwright-ct.config.ts",
         "check:type": "vue-tsc --noEmit"
     },
     "license": "MIT",
