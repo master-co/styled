@@ -7,6 +7,9 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     workers: process.env.CI ? 1 : undefined,
     reporter: 'list',
+    use: {
+        ctPort: 5100,
+    },
     projects: [
         {
             name: 'chromium',
