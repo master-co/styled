@@ -44,8 +44,8 @@ importers:
         specifier: ^1.41.2
         version: 1.42.0(@types/node@20.11.24)(vite@5.1.4)
       '@playwright/test':
-        specifier: ^1.42.0
-        version: 1.42.0
+        specifier: ^1.41.2
+        version: 1.41.2
       eslint-plugin-react-hooks:
         specifier: ^4.6.0
         version: 4.6.0(eslint@8.57.0)
@@ -69,8 +69,8 @@ importers:
         specifier: ^1.41.2
         version: 1.41.2(@types/node@20.11.24)(vite@5.1.4)(vue@3.4.21)
       '@playwright/test':
-        specifier: ^1.42.0
-        version: 1.42.0
+        specifier: ^1.41.2
+        version: 1.41.2
       '@types/node':
         specifier: ^20.11.24
         version: 20.11.24
@@ -1434,12 +1434,12 @@ packages:
       - vue
     dev: true
 
-  /@playwright/test@1.42.0:
-    resolution: {integrity: sha512-2k1HzC28Fs+HiwbJOQDUwrWMttqSLUVdjCqitBOjdCD0svWOMQUVqrXX6iFD7POps6xXAojsX/dGBpKnjZctLA==}
+  /@playwright/test@1.41.2:
+    resolution: {integrity: sha512-qQB9h7KbibJzrDpkXkYvsmiDJK14FULCCZgEcoe2AvFAS64oCirWTwzTlAYEbKaRxWs5TFesE1Na6izMv3HfGg==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright: 1.42.0
+      playwright: 1.41.2
     dev: true
 
   /@rollup/plugin-commonjs@25.0.7(rollup@4.12.0):
