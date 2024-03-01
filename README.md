@@ -8,7 +8,7 @@
         <img alt="Master" src="https://user-images.githubusercontent.com/33840671/205238945-3295c4f5-a88a-4b58-bca9-770fe7bf894e.svg" width="100%">
     </picture>
 </p>
-<p align="center">Create reusable and extensible style class variants</p>
+<p align="center">Create reusable and extensible styled elements in one line</p>
 
 <p align="center">
     <a aria-label="GitHub release (latest by date including pre-releases)" href="https://github.com/master-co/styled/releases">
@@ -216,7 +216,7 @@ return (
 ```
 
 ### Change an element's tag name
-Changing the original tag name of an element, such as `<button>` to `<a>`. Left empty `` even if there are no additional classes.
+Changing the original tag name of an element, such as `<button>` to `<a>`. Left empty '' even if there are no additional classes.
 ```tsx
 const Button = styled.button('inline-flex')
 const Link = styled.a(Button)``
