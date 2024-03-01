@@ -28,6 +28,10 @@ jobs:
             - run: pnpm install
             - run: pnpm install semantic-release-config-techor --workspace-root
             - run: pnpm build
+            - run: |
+                for dir in packages/*/; do
+                    cp README.md "$dir"
+                done
             - uses: lewagon/wait-on-check-action@v1.3.3
               with:
                   ref: ${{ github.ref }}
