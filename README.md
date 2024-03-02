@@ -51,7 +51,7 @@
 </div>
 
 ## Features
-Vanilla.js, React, Vue.js, Tailwind CSS, and [Master CSS](https://rc.css.master.co/docs/installation) are available:
+Vanilla, Next, React, Vue, Tailwind CSS, and [Master CSS](https://rc.css.master.co/docs/installation) are available:
 
 * ⚡️ Ultra-lightweight **~1.5KB**, powered by [`Proxy`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 * 🛡️ Type safety
@@ -61,7 +61,7 @@ Vanilla.js, React, Vue.js, Tailwind CSS, and [Master CSS](https://rc.css.master.
 * 🪄 Built-in first-class [`clsx`](https://github.com/lukeed/clsx) handling
 
 ## Why?
-😰 Traditionally, creating a simple styled element using a FunctionalComponent is unpleasant.
+😰 **Before**: Creating a simple styled element using a FunctionalComponent is unpleasant.
 ```tsx
 function Button(props) {
     return (
@@ -71,13 +71,13 @@ function Button(props) {
     )
 }
 ```
-🥳 Now it's in one line and ~80% code less.
+🥳 **After**: It's in one line and ~80% code less.
 ```tsx
 import styled from '@master/styled.react' // or .vue
 
 const Button = styled.button`inline-flex font:14`
 ```
-Then apply it as usual:
+Apply it as usual:
 ```tsx
 export default function App() {
     return (
@@ -91,9 +91,12 @@ It will be rendered as:
 ```
 
 ## Getting Started
-Install the package `npm i class-variant`, `npm i @master/styled.react`, or `npm i @master/styled.vue` depending on your framework:
+Install the package depending on your framework:
 
-### Vanilla JS
+### Vanilla
+```bash
+npm install class-variant
+```
 ```js
 import cv from 'class-variant'
 
@@ -103,10 +106,25 @@ const btn = cv`...` // or
 btn(props) // -> string
 ```
 
-### React, Vue
+### React
+```bash
+npm install @master/styled.react
+```
 ```js
 import styled from '@master/styled.react'
-import styled from '@master/styled.vue' // or
+
+const Button = styled.button(...params)
+const Button = styled.button`...` // or
+
+<Button {...props}>
+```
+
+### Vue
+```bash
+npm install @master/styled.vue
+```
+```js
+import styled from '@master/styled.vue'
 
 const Button = styled.button(...params)
 const Button = styled.button`...` // or
