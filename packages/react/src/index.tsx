@@ -27,7 +27,7 @@ type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
 type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = <F extends TemplateStringsArray | MasterExoticComponent<any> | baseType<E>>(
     firstParam: F,
     ...params: F extends MasterExoticComponent<any, any>
-        ? never
+        ? []
         : ParamsType<K, E>
 ) => (F extends MasterExoticComponent<any, any>
     ? ReturnType<K, E>
