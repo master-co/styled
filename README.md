@@ -232,6 +232,20 @@ return (
 <p class="a">A</p>
 <p class="a b">B</p>
 ```
+It also supports client components, taking Next.js’s `Link` as an example:
+```tsx
+'use client'
+
+import styled from '@master/styled.react';
+import Link from 'next/link';
+
+const Button = styled(Link)`inline-flex text:center`
+
+return (
+    <Button>Submit</Button>
+)
+```
+> ⚠️ If the extended target contains client components, the `'use client'` directive is required.
 
 ### Change an element's tag name
 Changing the original tag name of an element, such as `<button>` to `<a>`. Left empty '' even if there are no additional classes.
