@@ -19,7 +19,7 @@ type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<
     : K extends React.ComponentType<infer U>
     ? U
     : never) & Partial<E>, 'className' | 'ref'>);
-type MasterExoticComponent<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = React.ForwardRefExoticComponent<MasterComponentProps<K, E> & React.RefAttributes<K>> & { tag: K, params: TagParams };
+type MasterExoticComponent<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = React.ForwardRefExoticComponent<MasterComponentProps<K, E> & React.RefAttributes<K>> & { tag: K, params: TagParams, default?: MasterComponentProps<K, E> };
 
 type ParamType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = ((props: MasterComponentProps<K, E>) => baseLoopType<MasterComponentProps<K, E>> | undefined) | baseLoopType<MasterComponentProps<K, E>>
 type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Array<ParamType<K, E>>;
@@ -47,7 +47,7 @@ const styled: {
     ((firstParam: any, ...params: any[]) => {
         return (Array.isArray(firstParam) && 'raw' in firstParam || typeof firstParam !== 'object' || !('render' in firstParam))
             ? styled.div(firstParam as any, ...params)
-            : handle(firstParam.tag ?? firstParam, firstParam.params, firstParam.displayName, firstParam.defaultProps)
+            : handle(firstParam.tag ?? firstParam, firstParam.params, firstParam.displayName, firstParam.default)
     }) as any,
     {
         get: function (target, Tag: IntrinsicElementsKeys) {
@@ -64,6 +64,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
         const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
             const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]]
             const component = forwardRef<K, MasterComponentProps<K, E>>((props, ref) => {
+                props = Object.assign({}, component.default, props)
                 const classNames: string[] = []
                 const classesConditions: [string, Record<string, string | number | boolean>][] = []
                 let valuesByProp: Record<string, string | Record<string, string>>
@@ -169,7 +170,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
             component.displayName = displayName
             component.tag = Tag
             component.params = newTagParams
-            component.defaultProps = defaultProps as any
+            component.default = defaultProps as any
             return component
         }
 
@@ -182,7 +183,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
         if (Array.isArray(firstParam) && 'raw' in firstParam) {
             return generateFunctionComponent(firstParam as TemplateStringsArray, ...params.slice(1))
         } else if (typeof firstParam === 'object' && 'render' in firstParam) {
-            return handle(Tag, newTagParams, firstParam.displayName, firstParam.defaultProps)
+            return handle(Tag, newTagParams, firstParam.displayName, firstParam.default)
         } else {
             const templateStringsArray: any[] = []
             const newParams: any[] = []

@@ -36,7 +36,7 @@ export default function Styled() {
         ${['uppercase', { $intent: 'primary', $size: 'md' }]}
         ${({ $intent, $size }) => ({ 'font:italic': !!$intent && !!$size })}
     `
-    PropCompositionButton.defaultProps = {
+    PropCompositionButton.default = {
         $intent: 'primary'
     }
     const ExtendPropCompositionButton = styled(PropCompositionButton)`

@@ -170,7 +170,7 @@ return (
 
 You can set default properties for elements.
 ```tsx
-Button.defaultProps = {
+Button.default = {
     $size: 'md'
 }
 
