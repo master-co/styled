@@ -66,15 +66,15 @@
         "clsx": "^2.1.0"
     },
     "devDependencies": {
-        "@playwright/experimental-ct-vue": "1.41.2",
-        "@playwright/test": "1.41.2",
-        "@types/node": "^20.11.24",
+        "@playwright/experimental-ct-vue": "1.49.0",
+        "@playwright/test": "1.49.0",
+        "@types/node": "^22.10.1",
         "@vitejs/plugin-vue": "^4.6.2",
         "@vue/server-renderer": "^3.4.19",
         "@vue/test-utils": "^2.4.4",
-        "@vue/tsconfig": "^0.4.0",
-        "typescript": "^5.3.3",
-        "vite": "^5.1.4",
-        "vue-tsc": "^1.8.27"
+        "@vue/tsconfig": "^0.7.0",
+        "typescript": "5.6.2",
+        "vite": "^6.0.1",
+        "vue-tsc": "^2.0.29"
     }
 }

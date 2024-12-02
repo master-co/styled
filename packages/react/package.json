@@ -59,17 +59,17 @@
         "provenance": true
     },
     "peerDependencies": {
-        "@types/react": ">=15",
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
+        "@types/react": ">=16",
+        "react": ">=16",
+        "react-dom": ">=16"
     },
     "dependencies": {
         "class-variant": "workspace:^",
         "clsx": "^2.1.0"
     },
     "devDependencies": {
-        "@playwright/experimental-ct-react": "1.41.0",
-        "@playwright/test": "1.41.0",
+        "@playwright/experimental-ct-react": "1.49.0",
+        "@playwright/test": "1.49.0",
         "eslint-plugin-react-hooks": "^4.6.0"
     }
 }
