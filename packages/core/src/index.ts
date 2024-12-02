@@ -22,9 +22,9 @@ type ReturnType<T> = { default?: Partial<T> } & ((valueByProp?: T) => string)
  * 5. { intent: { primary: 'bg:blue-50 fg:white', secondary: 'bg:white fg:gray-80' }, size: { sm: 'font:20 py:1 px:2', md: 'font:16 py:2 px:4' }, disabled: 'opacity:.5' }
  * 6. ({ $intent, $size }) => $intent && $size && 'font:italic'
  */
-function cv<T extends Record<string, string | number | boolean>>(...params: Array<Param<T>>): ReturnType<T>
-function cv<T extends Record<string, string | number | boolean>>(firstParam: TemplateStringsArray, ...params: Array<Param<T>>): ReturnType<T>
-function cv<T extends Record<string, string | number | boolean>>(firstParam: TemplateStringsArray | Param<T>, ...params: Array<Param<T>>): ReturnType<T> {
+function cv<T extends Record<string, string | number | boolean>>(...params: Param<T>[]): ReturnType<T>
+function cv<T extends Record<string, string | number | boolean>>(firstParam: TemplateStringsArray, ...params: Param<T>[]): ReturnType<T>
+function cv<T extends Record<string, string | number | boolean>>(firstParam: TemplateStringsArray | Param<T>, ...params: Param<T>[]): ReturnType<T> {
     return function getClassNames(valueByProp: T = {} as any) {
         // 如果 valueByProps 中的屬性是 undefined 或是 null，則使用 default 中的值
         const defaultProps = (getClassNames as ReturnType<T>).default

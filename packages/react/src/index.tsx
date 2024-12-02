@@ -7,9 +7,9 @@ type baseType<E> = string
     | Record<string, boolean>
     | [string, { [key in keyof E]?: E[key] }]
     | { [key in keyof E]?: E[key] extends boolean | undefined ? string : Record<string, string> }
-type baseLoopType<E> = baseType<E> | Array<baseType<E>>;
-type extraType<E> = { className?: baseLoopType<E> | undefined, [key: string]: any };
-type TagParams = Array<[TemplateStringsArray, any[]]>;
+type baseLoopType<E> = baseType<E> | baseType<E>[];
+interface extraType<E> { className?: baseLoopType<E> | undefined, [key: string]: any }
+type TagParams = [TemplateStringsArray, any[]][];
 
 type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
 type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = extraType<E> & (Omit<(K extends IntrinsicElementsKeys
@@ -22,7 +22,7 @@ type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<
 type MasterExoticComponent<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = React.ForwardRefExoticComponent<MasterComponentProps<K, E> & React.RefAttributes<K>> & { tag: K, params: TagParams, default?: MasterComponentProps<K, E> };
 
 type ParamType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = ((props: MasterComponentProps<K, E>) => baseLoopType<MasterComponentProps<K, E>> | undefined) | baseLoopType<MasterComponentProps<K, E>>
-type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = Array<ParamType<K, E>>;
+type ParamsType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = ParamType<K, E>[];
 
 type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = <F extends TemplateStringsArray | MasterExoticComponent<any> | baseType<E>>(
     firstParam: F,
@@ -36,14 +36,8 @@ type ReturnType<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
 const styled: {
     [key in IntrinsicElementsKeys]: (<E extends object = object>(firstParam: TemplateStringsArray | ParamType<key, E>, ...params: ParamsType<key, E>) => MasterExoticComponent<key, E>)
     & (<F extends MasterExoticComponent<any, any>, E extends object = object>(firstParam: F) => F extends MasterExoticComponent<any, infer ME> ? ReturnType<key, ME & E> : never)
-} & {
-    <F extends MasterExoticComponent<any>, E extends object = object>(firstParam: F): F extends MasterExoticComponent<infer K, infer ME> ? ReturnType<K, ME & E> : never
-} & {
-    <E extends object = object>(firstParam: TemplateStringsArray | ParamType<'div', E>, ...params: ParamsType<'div', E>): MasterExoticComponent<'div', E>
-} & {
-    //@ts-ignore
-    <F extends React.ComponentType<any>, E extends object = object>(firstParam: F, ...params: F extends React.ComponentType<infer RE> ? ParamsType<'div', RE & E> : never): F extends React.ComponentType<infer RE> ? ReturnType<React.ComponentType<RE & E>> : never
-} = new Proxy(
+} & (<F extends MasterExoticComponent<any>, E extends object = object>(firstParam: F) => F extends MasterExoticComponent<infer K, infer ME> ? ReturnType<K, ME & E> : never) & (<E extends object = object>(firstParam: TemplateStringsArray | ParamType<'div', E>, ...params: ParamsType<'div', E>) => MasterExoticComponent<'div', E>) & //@ts-ignore
+(<F extends React.ComponentType<any>, E extends object = object>(firstParam: F, ...params: F extends React.ComponentType<infer RE> ? ParamsType<'div', RE & E> : never) => F extends React.ComponentType<infer RE> ? ReturnType<React.ComponentType<RE & E>> : never) = new Proxy(
     ((firstParam: any, ...params: any[]) => {
         return (Array.isArray(firstParam) && 'raw' in firstParam || typeof firstParam !== 'object' || !('render' in firstParam))
             ? styled.div(firstParam as any, ...params)
@@ -139,7 +133,7 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
                             }
                             break
                         case 'function':
-                            // eslint-disable-next-line no-case-declarations
+                             
                             const transformedParam = param(props)
                             if (typeof transformedParam === 'object' && handleParam(transformedParam))
                                 return true

@@ -20,7 +20,8 @@
         "url": "https://github.com/master-co/styled.git"
     },
     "dependencies": {
-        "@techor/repo": "^3.0.17"
+        "@techor/repo": "^3.1.4",
+        "eslint": "^9.16.0"
     },
     "devDependencies": {
         "class-variant": "workspace:^"

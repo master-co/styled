@@ -8,8 +8,8 @@ type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends (
     : B
 type WritableKeys<T> = {
     [P in keyof T]-?: IfEquals<
-        { [Q in P]: T[P]; },
-        { -readonly [Q in P]: T[P] },
+        Record<P, T[P]>,
+        Record<P, T[P]>,
         P
     >
 }[keyof T];
@@ -23,15 +23,15 @@ type BaseType<E> = string
     | string[]
     | Record<string, boolean>
     | (
-        E extends Array<any>
+        E extends any[]
         ? never
         : [string, { [key in keyof E]?: E[key] }]
         | { [key in keyof E]?: E[key] extends boolean | undefined ? string : Record<string, string> }
     )
-type BaseLoopType<E> = BaseType<E> | Array<BaseType<E>>
-type TagParams = Array<[TemplateStringsArray, any[]]>;
+type BaseLoopType<E> = BaseType<E> | BaseType<E>[]
+type TagParams = [TemplateStringsArray, any[]][];
 type ParamType<K extends HTMLElementTagNameKeys | VNode, E extends object = object> = ((props: MasterComponentProps<K, E>) => BaseLoopType<MasterComponentProps<K, E>> | undefined) | BaseLoopType<MasterComponentProps<K, E>>
-type ParamsType<K extends HTMLElementTagNameKeys | VNode, E extends object = object> = Array<ParamType<K, E>>;
+type ParamsType<K extends HTMLElementTagNameKeys | VNode, E extends object = object> = ParamType<K, E>[];
 type MasterComponentProps<K extends HTMLElementTagNameKeys | VNode, E extends object = object> =
     Partial<E>
     & { className?: BaseLoopType<E> | undefined, [key: string]: any }
@@ -55,15 +55,7 @@ const styled: {
     & (<E extends object>(firstParam: TemplateStringsArray | ParamType<K, E>, ...params: ParamsType<K, E>) => MasterComponent<K, E>)
     & (<F extends MasterComponent<any>, E extends object = object>(firstParam: F) => F extends MasterComponent<any, infer ME> ? ReturnType<K, ME & E> : never)
     & (<F extends VNode, E extends object = object>(firstParam: F) => ReturnType<K, E>)
-} & {
-    <F extends MasterComponent<any>, E extends object = object>(firstParam: F): F extends MasterComponent<infer K, infer ME> ? ReturnType<K, ME & E> : never
-} & {
-    <F extends VNode, E extends object = object>(firstParam: F): ReturnType<F, E>
-} & {
-    (firstParam: TemplateStringsArray | ParamType<'div'>, ...params: ParamsType<'div'>): MasterComponent<'div'>
-} & {
-    <E extends object = object>(firstParam: TemplateStringsArray | ParamType<'div', E>, ...params: ParamsType<'div', E>): MasterComponent<'div', E>
-} = new Proxy(
+} & (<F extends MasterComponent<any>, E extends object = object>(firstParam: F) => F extends MasterComponent<infer K, infer ME> ? ReturnType<K, ME & E> : never) & (<F extends VNode, E extends object = object>(firstParam: F) => ReturnType<F, E>) & ((firstParam: TemplateStringsArray | ParamType<'div'>, ...params: ParamsType<'div'>) => MasterComponent<'div'>) & (<E extends object = object>(firstParam: TemplateStringsArray | ParamType<'div', E>, ...params: ParamsType<'div', E>) => MasterComponent<'div', E>) = new Proxy(
     // @ts-ignore
     ((firstParam, ...params) => {
         return (
@@ -161,7 +153,7 @@ function handle<K extends string | VNode, E extends object = object>(tag: K, tag
                                     }
                                     break
                                 case 'function':
-                                    // eslint-disable-next-line no-case-declarations
+
                                     const transformedParam = param(mergedProps)
                                     if (typeof transformedParam === 'object' && handleParam(transformedParam))
                                         return true
