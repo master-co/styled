@@ -59,3 +59,18 @@ test('literal function', () => {
     expect(literalBtn({ intent: 'secondary', size: 'sm', color: 'red' })).toBe('inline-flex rounded top:30 left:40 font:semibold color:red bg:white fg:slate-30 bg:slate-90:hover text:14 p:5|15')
     expect(literalBtn({ intent: 'primary', size: 'md', color: 'red' })).toBe('inline-flex rounded top:30 left:40 font:semibold color:red uppercase bg:blue fg:white bg:blue-55:hover text:16 p:10|25')
 })
+
+test('extend default', () => {
+    const style = cv<any>('block', {
+        $type: {
+            a: 'bg:red',
+            b: 'bg:blue'
+        }
+    })
+    style.default = {
+        $type: 'a'
+    }
+    expect(style()).toBe('block bg:red')
+    expect(style({ $type: undefined })).toBe('block bg:red')
+    expect(style({ $type: 'b' })).toBe('block bg:blue')
+})

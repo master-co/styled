@@ -64,7 +64,14 @@ function handle<K extends IntrinsicElementsKeys | React.ComponentType<any>, E ex
         const generateFunctionComponent = (defaultClassNames: TemplateStringsArray, ...params: any[]) => {
             const newTagParams: TagParams = [...(tagParams || []), [defaultClassNames, params]]
             const component = forwardRef<K, MasterComponentProps<K, E>>((props, ref) => {
-                props = Object.assign({}, component.default, props)
+                const resolvedProps: any = component.default ? Object.assign({}, component.default) : {}
+                for (const propKey in props) {
+                    const propValue = props[propKey]
+                    if (propValue !== undefined && propValue !== null) {
+                        resolvedProps[propKey] = propValue
+                    }
+                }
+                props = resolvedProps
                 const classNames: string[] = []
                 const classesConditions: [string, Record<string, string | number | boolean>][] = []
                 let valuesByProp: Record<string, string | Record<string, string>>

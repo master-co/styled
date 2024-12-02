@@ -5,12 +5,12 @@ type Param<T> = string
     | Record<string, boolean>
     | [string, { [key in keyof T]?: T[key] }]
     | {
-        [key in keyof T]?: T[key] extends string | undefined
-            ? Record<string, string>
-            : T[key] extends boolean | undefined
-                ? string
-                : (Record<string, string> | string)
-    }
+    [key in keyof T]?: T[key] extends string | undefined
+    ? Record<string, string>
+    : T[key] extends boolean | undefined
+    ? string
+    : (Record<string, string> | string)
+}
     | ((valueByProp: T) => any)
 type ReturnType<T> = { default?: Partial<T> } & ((valueByProp?: T) => string)
 
@@ -26,7 +26,13 @@ function cv<T extends Record<string, string | number | boolean>>(...params: Arra
 function cv<T extends Record<string, string | number | boolean>>(firstParam: TemplateStringsArray, ...params: Array<Param<T>>): ReturnType<T>
 function cv<T extends Record<string, string | number | boolean>>(firstParam: TemplateStringsArray | Param<T>, ...params: Array<Param<T>>): ReturnType<T> {
     return function getClassNames(valueByProp: T = {} as any) {
-        const mergedValueByProp = Object.assign({}, (getClassNames as ReturnType<T>).default, valueByProp)
+        // 如果 valueByProps 中的屬性是 undefined 或是 null，則使用 default 中的值
+        const defaultProps = (getClassNames as ReturnType<T>).default
+        const mergedValueByProp: any = defaultProps ? Object.assign({}, defaultProps) : {}
+        for (const eachProp in valueByProp) {
+            const eachDefaultValue = defaultProps?.[eachProp]
+            mergedValueByProp[eachProp] = valueByProp[eachProp] ?? eachDefaultValue
+        }
         const isTemplateLiteral = Array.isArray(firstParam) && 'raw' in firstParam
         const classesConditions: [string, Record<string, string | number | boolean>][] = []
         const valuesByProp: Record<string, Record<string, string>> = {}
