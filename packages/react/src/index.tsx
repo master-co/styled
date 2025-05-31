@@ -11,9 +11,9 @@ type baseLoopType<E> = baseType<E> | baseType<E>[];
 interface extraType<E> { className?: baseLoopType<E> | undefined, [key: string]: any }
 type TagParams = [TemplateStringsArray, any[]][];
 
-type IntrinsicElementsKeys = keyof JSX.IntrinsicElements;
+type IntrinsicElementsKeys = keyof React.JSX.IntrinsicElements;
 type MasterComponentProps<K extends IntrinsicElementsKeys | React.ComponentType<any>, E extends object = object> = extraType<E> & (Omit<(K extends IntrinsicElementsKeys
-    ? JSX.IntrinsicElements[K] extends React.DetailedHTMLProps<infer Attributes, infer Element>
+    ? React.JSX.IntrinsicElements[K] extends React.DetailedHTMLProps<infer Attributes, infer Element>
     ? Attributes
     : never
     : K extends React.ComponentType<infer U>
